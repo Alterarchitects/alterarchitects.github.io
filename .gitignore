@@ -1,0 +1,14 @@
+# Backups & working files — do not publish
+backups/
+*.bak
+index_bak_*.html
+index_BROKEN_*.html
+TRUNC_*.html
+TRUNC_*.bak
+build_projects.py
+PROJECT_STATUS.md
+DEPLOY.txt
+assets/new_logos/
+assets/projects/style/
+.DS_Store
+Thumbs.db

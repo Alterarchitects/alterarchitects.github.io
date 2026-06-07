@@ -1,0 +1,7 @@
+# Synced from altertects.com gallery (reliable ~mv2 renders). Drop local 01.jpg.. to override.
+https://static.wixstatic.com/media/5648d3_a38deac495084dbfa6096c8a9c67e0be~mv2.jpg/v1/fit/w_1400,h_1400,q_85,enc_auto/5648d3_a38deac495084dbfa6096c8a9c67e0be~mv2.jpg
+https://static.wixstatic.com/media/5648d3_a38deac495084dbfa6096c8a9c67e0be~mv2.jpg/v1/fit/w_1400,h_1400,q_85,enc_auto/5648d3_a38deac495084dbfa6096c8a9c67e0be~mv2.jpg
+https://static.wixstatic.com/media/5648d3_df18faff155746d5afe04973bbf9eb98~mv2.jpg/v1/fit/w_1400,h_1400,q_85,enc_auto/5648d3_df18faff155746d5afe04973bbf9eb98~mv2.jpg
+https://static.wixstatic.com/media/5648d3_908f6837f58c43baa086a291f3e66077~mv2.jpg/v1/fit/w_1400,h_1400,q_85,enc_auto/5648d3_908f6837f58c43baa086a291f3e66077~mv2.jpg
+https://static.wixstatic.com/media/5648d3_11d9788916184cd9ab198e7a92a045be~mv2.jpg/v1/fit/w_1400,h_1400,q_85,enc_auto/5648d3_11d9788916184cd9ab198e7a92a045be~mv2.jpg
+https://static.wixstatic.com/media/5648d3_7c25d4e2163d498ebe76df4eba030f94~mv2.jpg/v1/fit/w_1400,h_1400,q_85,enc_auto/5648d3_7c25d4e2163d498ebe76df4eba030f94~mv2.jpg
