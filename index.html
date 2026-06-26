@@ -591,11 +591,14 @@
   #intro.tiling #gate .gicon{filter:brightness(0)}
   @media(max-width:760px){.clientwall{height:170vh!important}.clientwall .cw-pin{position:sticky!important;top:0!important;height:100vh!important;overflow:hidden!important;display:flex!important;flex-direction:column!important;justify-content:center!important;align-items:center!important;padding:48px 12px!important}.clientwall .cw-head{opacity:1!important;transform:none!important;flex:0 0 auto!important;margin-bottom:12px}.clientwall .cw-grid{opacity:1!important;transform:none!important;display:grid!important;grid-template-columns:repeat(6,1fr)!important;grid-auto-rows:1fr!important;gap:6px!important;flex:1 1 auto!important;min-height:0!important;width:100%!important;max-width:560px!important;align-self:stretch!important}.clientwall .cw-logo{aspect-ratio:auto!important;width:100%!important;height:100%!important;min-height:0!important}.cw-logo>.cl-real{opacity:1!important;object-fit:contain}.cw-logo>.cl-lime{display:none!important}#manifesto{height:360vh!important}#manifesto .hl-stage{position:sticky!important;top:0;height:100vh;min-height:auto;display:flex;align-items:center;padding:80px 22px}#manifesto .hl-text{font-size:clamp(34px,9.5vw,60px)!important;line-height:1.26}}
 
-  /* === CLEAN CLIENT WALL (uniform grayscale, hover->colour, no lime blobs) === */
-  .clientwall{height:auto!important;background:#fff!important}
-  .clientwall .cw-pin{position:relative!important;height:auto!important;min-height:auto!important;background:#fff!important;justify-content:flex-start!important;padding:clamp(56px,8vh,104px) clamp(18px,5vw,60px)!important}
-  .clientwall .cw-head{position:relative!important;opacity:1!important;transform:none!important;padding-top:0!important;margin-bottom:clamp(26px,5vh,52px)!important}
-  .clientwall .cw-grid{opacity:1!important;transform:none!important;align-content:flex-start!important}
+  /* === CLEAN CLIENT WALL — one screen, uniform grayscale, hover->colour === */
+  .clientwall{height:100vh!important;min-height:580px;background:#fff!important}
+  .clientwall .cw-pin{position:relative!important;height:100vh!important;min-height:580px;background:#fff!important;display:flex!important;flex-direction:column!important;justify-content:center!important;align-items:center!important;overflow:hidden!important;padding:clamp(34px,5vh,60px) clamp(16px,4vw,56px)!important}
+  .clientwall .cw-head{position:relative!important;opacity:1!important;transform:none!important;padding-top:0!important;margin-bottom:clamp(12px,2.4vh,26px)!important}
+  .clientwall .cw-head h2{font-size:clamp(28px,3.8vw,50px)!important;line-height:1!important}
+  .clientwall .cw-head .lead{margin-top:8px!important;font-size:clamp(13px,1.3vw,15px)!important}
+  .clientwall .cw-grid{opacity:1!important;transform:none!important;align-content:center!important;gap:clamp(6px,1vh,13px) clamp(12px,1.4vw,24px)!important;width:100%}
+  .clientwall .cw-logo{flex:0 0 clamp(92px,8.6vw,122px)!important}
   .clientwall .cl-lime{display:none!important}
   .clientwall .cl-real{opacity:1!important;filter:grayscale(1) opacity(.72);transition:filter .35s ease}
   .clientwall .cw-logo:hover .cl-real{filter:grayscale(0) opacity(1)}
