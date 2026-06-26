@@ -608,14 +608,17 @@
     .clientwall .cw-grid{align-content:center!important;gap:clamp(6px,1vh,13px) clamp(12px,1.4vw,24px)!important}
     .clientwall .cw-logo{flex:0 0 clamp(92px,8.6vw,122px)!important}
   }
-  /* MOBILE: clean grayscale wall, 3 per row, scrolls normally (no clipping) */
+  /* MOBILE: ALL logos on ONE screen, ORIGINAL colours */
   @media(max-width:760px){
-    .clientwall{height:auto!important;min-height:auto!important}
-    .clientwall .cw-pin{position:relative!important;height:auto!important;min-height:auto!important;background:#fff!important;display:flex!important;flex-direction:column!important;justify-content:flex-start!important;align-items:center!important;overflow:visible!important;padding:54px 16px 46px!important}
-    .clientwall .cw-head{margin-bottom:20px!important}
-    .clientwall .cw-head h2{font-size:clamp(28px,8vw,42px)!important;line-height:1.02!important}
-    .clientwall .cw-grid{display:flex!important;flex-wrap:wrap!important;justify-content:center!important;align-content:flex-start!important;gap:12px 12px!important;max-width:520px;margin:0 auto!important}
-    .clientwall .cw-logo{flex:0 0 calc(33.333% - 8px)!important;aspect-ratio:5/3!important;width:auto!important;height:auto!important;min-height:0!important}
+    .clientwall{height:100vh!important;min-height:560px}
+    .clientwall .cw-pin{position:relative!important;height:100vh!important;min-height:560px;background:#fff!important;display:flex!important;flex-direction:column!important;justify-content:center!important;align-items:center!important;overflow:hidden!important;padding:42px 12px 32px!important}
+    .clientwall .cw-head{margin-bottom:10px!important;flex:0 0 auto!important}
+    .clientwall .cw-head .secnum{margin-bottom:7px!important}
+    .clientwall .cw-head h2{font-size:clamp(22px,6.6vw,34px)!important;line-height:1.02!important}
+    .clientwall .cw-head .lead{display:none!important}
+    .clientwall .cw-grid{display:grid!important;grid-template-columns:repeat(6,1fr)!important;grid-auto-rows:1fr!important;gap:6px!important;width:100%;max-width:560px;flex:1 1 auto!important;min-height:0!important;align-content:stretch!important;margin:0 auto!important}
+    .clientwall .cw-logo{flex:none!important;width:auto!important;height:auto!important;aspect-ratio:auto!important;min-height:0!important}
+    .clientwall .cl-real{filter:none!important;opacity:1!important}
   }
 </style>
 </head>
