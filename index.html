@@ -53,7 +53,7 @@
     --ink:#141414;
     --white:#FFFFFF;
     --paper:#F4F4F1;
-    --gray:#8A8A85;
+    --gray:#6e6e69;
     --line:#E4E4DE;
     --lime:#C8F23C;        /* signature accent */
     --lime-deep:#B4E018;
@@ -638,6 +638,32 @@
   .cta-info{grid-template-columns:1fr!important;gap:18px!important;margin-top:0!important}
   @media(min-width:761px){.cta-end>.wrap{padding-top:7vh;padding-bottom:7vh}}
   .cform button:disabled{opacity:.6;cursor:default}
+
+  /* ===== Accessibility (WCAG 2.0 AA / IS 5568) ===== */
+  a:focus-visible,button:focus-visible,[tabindex]:focus-visible,input:focus-visible,textarea:focus-visible,.card:focus-visible{outline:3px solid var(--lime);outline-offset:2px;border-radius:2px}
+  @media(prefers-reduced-motion:reduce){.clientwall .cl-real{animation:none!important}.cta-bg,.hero .slide{transition:none!important}}
+  /* a11y toggle states (classes on <html>) */
+  html.a11y-fs1{font-size:112.5%}html.a11y-fs2{font-size:125%}html.a11y-fs3{font-size:140%}
+  html.a11y-contrast{filter:contrast(1.32)}html.a11y-gray{filter:grayscale(1)}html.a11y-contrast.a11y-gray{filter:grayscale(1) contrast(1.32)}
+  html.a11y-links a{text-decoration:underline!important;text-underline-offset:2px}
+  html.a11y-readable,html.a11y-readable *{font-family:Arial,Helvetica,sans-serif!important;letter-spacing:normal!important}
+  html.a11y-nomotion *{animation-duration:.001s!important;animation-iteration-count:1!important;transition-duration:.001s!important}
+  html.a11y-nomotion{scroll-behavior:auto!important}
+  /* a11y menu UI */
+  #a11y-fab{position:fixed;right:20px;bottom:84px;z-index:140;width:52px;height:52px;border-radius:50%;background:#0b51d0;border:2px solid #fff;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(0,0,0,.34)}
+  #a11y-fab svg{width:30px;height:30px;fill:#fff}
+  #a11y-fab:hover{background:#0a45b0}
+  #a11y-panel{position:fixed;right:20px;bottom:148px;z-index:141;width:312px;max-width:calc(100vw - 36px);max-height:72vh;overflow:auto;background:#fff;color:#16161a;border-radius:16px;box-shadow:0 26px 70px rgba(0,0,0,.42);padding:18px 18px 20px;display:none;direction:rtl;text-align:right;font-family:Arial,Helvetica,sans-serif}
+  #a11y-panel.open{display:block}
+  #a11y-panel h2{font-size:17px;margin:0 0 2px;color:#0b0b0b;font-weight:800}
+  #a11y-panel .sub{font-size:12px;color:#555;margin:0 0 14px}
+  #a11y-panel .grp{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px}
+  #a11y-panel button.opt{border:1px solid #cfcfcf;background:#f4f4f5;color:#16161a;padding:11px 8px;border-radius:9px;cursor:pointer;font-size:13px;font-weight:700}
+  #a11y-panel button.opt:hover{background:#eaeaeb}
+  #a11y-panel button.opt[aria-pressed="true"]{background:#0b51d0;color:#fff;border-color:#0b51d0}
+  #a11y-panel .reset{width:100%;margin-top:10px;border:1px solid #cfcfcf;background:#fff;color:#0b0b0b;padding:11px;border-radius:9px;cursor:pointer;font-weight:800;font-size:13px}
+  #a11y-panel .stmt{display:block;margin-top:12px;font-size:12px;color:#0b51d0;text-decoration:underline}
+  #a11y-panel .x{position:absolute;top:10px;left:12px;background:none;border:0;font-size:22px;cursor:pointer;color:#444;line-height:1}
 </style>
 </head>
 <body>
@@ -1196,10 +1222,10 @@
       <input type="hidden" name="_subject" value="New inquiry from altertects.com">
       <input type="hidden" name="_template" value="table">
       <input type="hidden" name="_captcha" value="false">
-      <input type="text" name="name" placeholder="Your name" autocomplete="name" required>
-      <input type="email" name="email" placeholder="Email" autocomplete="email" required>
-      <input type="text" name="phone" placeholder="Phone (optional)" autocomplete="tel" class="full">
-      <textarea name="message" placeholder="Tell us about your project" class="full" required></textarea>
+      <input type="text" name="name" placeholder="Your name" aria-label="Your name" autocomplete="name" required>
+      <input type="email" name="email" placeholder="Email" aria-label="Email address" autocomplete="email" required>
+      <input type="text" name="phone" placeholder="Phone (optional)" aria-label="Phone (optional)" autocomplete="tel" class="full">
+      <textarea name="message" placeholder="Tell us about your project" aria-label="Tell us about your project" class="full" required></textarea>
       <button type="submit">Send message</button>
     </form>
     <div class="info cta-info">
@@ -1211,7 +1237,7 @@
 </div></section>
 
 <footer><div class="wrap">
-  <span>© 2026 Alter Architects. All rights reserved.</span>
+  <span>© 2026 Alter Architects. All rights reserved. · <a href="accessibility.html" style="color:var(--lime);text-decoration:underline">הצהרת נגישות</a></span>
   <span>Refined. Innovative. Tailor Made.</span>
 </div></footer>
 
@@ -1519,6 +1545,73 @@
      .then(function(){ cf.innerHTML='<div class="ok">Thank you \u2014 your message is on its way. We\u2019ll be in touch shortly.</div>'; })
      .catch(function(){ btn.disabled=false; btn.textContent=old; alert('Sorry, something went wrong. Please email office@altertects.com'); });
   });
+})();
+</script>
+<button id="a11y-fab" aria-label="פתיחת תפריט נגישות" aria-expanded="false" aria-controls="a11y-panel"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="4" r="2"/><path d="M20 8.5c0 .5-.4.9-.9 1-2 .4-3.7.6-5.1.6v2.4l1.9 6.6c.2.6-.2 1.2-.8 1.3-.6.2-1.2-.2-1.3-.8L12 14.6l-1.8 5c-.1.6-.7 1-1.3.8-.6-.1-1-.7-.8-1.3l1.9-6.6V10c-1.4 0-3.1-.2-5.1-.6-.5-.1-.9-.5-.9-1 0-.6.5-1.1 1.1-1 2.2.4 4.2.6 6 .6s3.8-.2 6-.6c.6-.1 1.1.4 1.1 1z"/></svg></button>
+<div id="a11y-panel" role="dialog" aria-label="תפריט נגישות">
+  <button class="x" id="a11yClose" aria-label="סגירה">×</button>
+  <h2>תפריט נגישות</h2>
+  <p class="sub">התאמת האתר לצרכים אישיים</p>
+  <div class="grp">
+    <button class="opt" id="a11yInc">טקסט גדול א+</button>
+    <button class="opt" id="a11yDec">טקסט קטן א-</button>
+    <button class="opt" id="a11yContrast" aria-pressed="false">ניגודיות גבוהה</button>
+    <button class="opt" id="a11yGray" aria-pressed="false">גווני אפור</button>
+    <button class="opt" id="a11yLinks" aria-pressed="false">הדגשת קישורים</button>
+    <button class="opt" id="a11yMotion" aria-pressed="false">עצירת אנימציות</button>
+    <button class="opt" id="a11yReadable" aria-pressed="false">פונט קריא</button>
+    <button class="opt" id="a11yReset2">איפוס</button>
+  </div>
+  <a class="stmt" href="accessibility.html">להצהרת הנגישות המלאה ←</a>
+</div>
+<script>
+(function(){
+  var H=document.documentElement, LS=window.localStorage, KEY='a11yPrefs';
+  var st={fs:0,contrast:false,gray:false,links:false,motion:false,readable:false};
+  try{st=Object.assign(st,JSON.parse(LS.getItem(KEY)||'{}'));}catch(e){}
+  function P(id,v){var b=document.getElementById(id);if(b)b.setAttribute('aria-pressed',v?'true':'false');}
+  function apply(){
+    H.classList.remove('a11y-fs1','a11y-fs2','a11y-fs3');
+    if(st.fs>0)H.classList.add('a11y-fs'+st.fs);
+    H.classList.toggle('a11y-contrast',st.contrast);
+    H.classList.toggle('a11y-gray',st.gray);
+    H.classList.toggle('a11y-links',st.links);
+    H.classList.toggle('a11y-nomotion',st.motion);
+    H.classList.toggle('a11y-readable',st.readable);
+    P('a11yContrast',st.contrast);P('a11yGray',st.gray);P('a11yLinks',st.links);P('a11yMotion',st.motion);P('a11yReadable',st.readable);
+    try{LS.setItem(KEY,JSON.stringify(st));}catch(e){}
+  }
+  apply();
+  var fab=document.getElementById('a11y-fab'), pan=document.getElementById('a11y-panel');
+  function open(o){pan.classList.toggle('open',o);fab.setAttribute('aria-expanded',o?'true':'false');if(o){var f=pan.querySelector('button');if(f)f.focus();}}
+  fab.addEventListener('click',function(){open(!pan.classList.contains('open'));});
+  document.getElementById('a11yClose').addEventListener('click',function(){open(false);fab.focus();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&pan.classList.contains('open')){open(false);fab.focus();}});
+  document.addEventListener('click',function(e){if(pan.classList.contains('open')&&!pan.contains(e.target)&&e.target!==fab&&!fab.contains(e.target))open(false);});
+  function tog(k){st[k]=!st[k];apply();}
+  document.getElementById('a11yInc').addEventListener('click',function(){if(st.fs<3)st.fs++;apply();});
+  document.getElementById('a11yDec').addEventListener('click',function(){if(st.fs>0)st.fs--;apply();});
+  document.getElementById('a11yContrast').addEventListener('click',function(){tog('contrast');});
+  document.getElementById('a11yGray').addEventListener('click',function(){tog('gray');});
+  document.getElementById('a11yLinks').addEventListener('click',function(){tog('links');});
+  document.getElementById('a11yMotion').addEventListener('click',function(){tog('motion');});
+  document.getElementById('a11yReadable').addEventListener('click',function(){tog('readable');});
+  function reset(){st={fs:0,contrast:false,gray:false,links:false,motion:false,readable:false};apply();}
+  document.getElementById('a11yReset2').addEventListener('click',reset);
+  // --- keyboard access for project cards ---
+  document.querySelectorAll('.card').forEach(function(c){
+    if(!c.hasAttribute('tabindex'))c.setAttribute('tabindex','0');
+    c.setAttribute('role','button');
+    var t=c.querySelector('h3'); if(t)c.setAttribute('aria-label','Open project: '+t.textContent.trim());
+    c.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();c.click();}});
+  });
+  // --- modal focus management ---
+  var pm=document.getElementById('pmodal');
+  if(pm){pm.setAttribute('role','dialog');pm.setAttribute('aria-modal','true');pm.setAttribute('aria-label','Project gallery');
+    var last=null, _o=window.openProject, _c=window.closeProject;
+    if(_o)window.openProject=function(k){last=document.activeElement;_o(k);var cl=pm.querySelector('.pm-close');if(cl)setTimeout(function(){cl.focus();},60);};
+    if(_c)window.closeProject=function(){_c();if(last&&last.focus)last.focus();};
+  }
 })();
 </script>
 </body>
