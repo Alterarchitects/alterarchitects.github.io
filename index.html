@@ -469,7 +469,7 @@
   @media(max-width:760px){.hl{height:auto}.hl-stage{position:relative;height:auto;min-height:80vh;padding:90px 24px}.hl-text{font-size:clamp(26px,7.2vw,42px);line-height:1.3}.hl .lab{margin-bottom:22px}}
 
   /* ---------- PINNED SCROLL SCENES + DRAMATIC END ---------- */
-  .pin{position:relative;height:300vh}
+  .pin{position:relative;height:235vh}
   .pin .pin-stage{position:sticky;top:0;height:100vh;overflow:hidden;display:flex;flex-direction:column;justify-content:center;padding:0 8vw}
   .pin .inner{position:relative;z-index:2}
   .pin .lab{color:var(--lime);letter-spacing:.32em;font-size:13px;font-weight:700;text-transform:uppercase;margin-bottom:26px}
@@ -595,7 +595,7 @@
   .clientwall{background:#fff!important}
   .clientwall .cl-lime{display:none!important}
   .clientwall .cl-real{opacity:1!important;filter:grayscale(1) opacity(.72);transition:filter .35s ease}
-  .clientwall .cw-logo:hover .cl-real{filter:grayscale(0) opacity(1)}
+  .clientwall .cw-logo:hover .cl-real{filter:grayscale(0) opacity(1)!important;animation-play-state:paused}
   .clientwall .cw-head{position:relative!important;opacity:1!important;transform:none!important;padding-top:0!important}
   .clientwall .cw-grid{opacity:1!important;transform:none!important;width:100%}
   /* DESKTOP: fit heading + all logos on one screen */
@@ -620,6 +620,18 @@
     .clientwall .cw-logo{flex:none!important;width:auto!important;height:auto!important;aspect-ratio:auto!important;min-height:0!important}
     .clientwall .cl-real{filter:none!important;opacity:1!important}
   }
+
+  /* === PROCESS — pin & hold ~3 screens (desktop), fits one screen === */
+  #process{position:relative}
+  @media(min-width:761px){
+    #process{height:380vh}
+    #process>.wrap{position:sticky;top:0;min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding-top:clamp(36px,6vh,84px)!important;padding-bottom:clamp(36px,6vh,84px)!important}
+    #process .steps{margin-top:clamp(26px,4vh,48px)}
+    #process .step{min-height:clamp(150px,21vh,196px);padding:26px 24px 30px}
+  }
+  /* === CLIENT LOGOS — sharp colour wave sweeping left -> right (desktop) === */
+  @keyframes cwave{0%,44%{filter:grayscale(1) opacity(.72)}50%{filter:grayscale(0) opacity(1)}56%,100%{filter:grayscale(1) opacity(.72)}}
+  @media(min-width:761px){.clientwall .cl-real{animation:cwave 5.5s linear infinite}}
 </style>
 </head>
 <body>
@@ -1458,6 +1470,22 @@
   };
   enter.addEventListener('mouseenter',on);
   enter.addEventListener('mouseleave',off);
+})();
+</script>
+<script>
+(function(){
+  function cwaveDelays(){
+    if(innerWidth<=760)return;
+    var grid=document.querySelector('.clientwall .cw-grid'); if(!grid)return;
+    var gr=grid.getBoundingClientRect(), W=gr.width||1, PER=5.5;
+    grid.querySelectorAll('.cl-real').forEach(function(img){
+      var r=img.getBoundingClientRect();
+      var cx=((r.left+r.width/2)-gr.left)/W;
+      img.style.animationDelay=(-(cx*PER)).toFixed(2)+'s';
+    });
+  }
+  addEventListener('load',cwaveDelays); addEventListener('resize',cwaveDelays);
+  setTimeout(cwaveDelays,1200); setTimeout(cwaveDelays,3000);
 })();
 </script>
 </body>
