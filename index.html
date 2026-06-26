@@ -671,7 +671,7 @@
   var track=document.getElementById('track'),muted=false,started=false,VOL=.035,fadeIv;
   /* mobile (esp. iOS, which ignores JS volume): load a pre-lowered audio file */
   var MOBILE=/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)||innerWidth<=760;
-  if(MOBILE){ track.src='assets/soundtrack_mobile.mp3'; VOL=.5; }
+  if(MOBILE){ track.src='assets/soundtrack_mobile.mp3'; VOL=1; }
   function startAudio(){
     try{
       track.volume=0; track.currentTime=0;
