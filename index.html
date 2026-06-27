@@ -1682,7 +1682,8 @@
       pre.onerror=function(){card.dataset.swapping='';};
       pre.src=next;
     }
-    (function tick(){ doSwap(); setTimeout(tick, 3600+Math.random()*2800); })();
+    /* project image swap ON HOLD per request — re-enable by uncommenting */
+    /* (function tick(){ doSwap(); setTimeout(tick, 3600+Math.random()*2800); })(); */
   }
   /* ---- Custom A cursor (desktop, pointer:fine) ---- */
   if(matchMedia('(pointer:fine)').matches && innerWidth>760){
