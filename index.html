@@ -784,8 +784,14 @@
   }
   snd.addEventListener('click',toggleSound);
 
+  /* light haptic feedback — Android only; iOS Safari ignores the Vibration API */
+  function vib(p){ try{ if(MOBILE && navigator.vibrate && !reduce) navigator.vibrate(p); }catch(e){} }
+  /* gentle continuous flutter for the whole opening-image sequence */
+  function vibRun(ms){ try{ if(!(MOBILE && navigator.vibrate && !reduce))return; var pat=[],t=0; while(t<ms){pat.push(18,52);t+=70;} navigator.vibrate(pat); }catch(e){} }
+  function vibStop(){ try{ if(MOBILE && navigator.vibrate) navigator.vibrate(0); }catch(e){} }
   function reveal(){
     if(window.__introDone)return; window.__introDone=true;
+    vibStop(); vib(28);
     document.body.classList.add('revealed');
     window.dispatchEvent(new Event('alterReveal'));
     intro.style.display='none';
@@ -842,10 +848,12 @@
     gate.classList.add('gone');
     intro.classList.add('playing');
     if(reduce){ setTimeout(reveal,500); return; }
+    vibRun(5600);                                       /* light flutter while the opening images run */
     setTimeout(function(){ journey(reveal); }, 3100);  /* sequence breathes → journey → wipe */
     setTimeout(reveal, 7000);  /* failsafe: reveal even if timers are throttled */
   }
   enter.addEventListener('click',function(){
+    vib(24);
     if(window.__tilesActive && window.__tilesReverse){ if(!reduce){try{startAudio();}catch(e){}} gate.classList.add('gone'); window.__tilesReverse(begin); }
     else begin();
   });
