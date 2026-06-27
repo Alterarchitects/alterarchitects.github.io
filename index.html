@@ -608,10 +608,10 @@
     .clientwall .cw-grid{align-content:center!important;gap:clamp(6px,1vh,13px) clamp(12px,1.4vw,24px)!important}
     .clientwall .cw-logo{flex:0 0 clamp(92px,8.6vw,122px)!important}
   }
-  /* MOBILE: ALL logos on ONE screen, ORIGINAL colours */
+  /* MOBILE: ALL logos on ONE screen, ORIGINAL colours — pins briefly */
   @media(max-width:760px){
-    .clientwall{height:100vh!important;min-height:560px}
-    .clientwall .cw-pin{position:relative!important;height:100vh!important;min-height:560px;background:#fff!important;display:flex!important;flex-direction:column!important;justify-content:center!important;align-items:center!important;overflow:hidden!important;padding:42px 12px 32px!important}
+    .clientwall{height:175vh!important;min-height:560px}
+    .clientwall .cw-pin{position:sticky!important;top:0!important;height:100vh!important;min-height:560px;background:#fff!important;display:flex!important;flex-direction:column!important;justify-content:center!important;align-items:center!important;overflow:hidden!important;padding:42px 12px 32px!important}
     .clientwall .cw-head{margin-bottom:10px!important;flex:0 0 auto!important}
     .clientwall .cw-head .secnum{margin-bottom:7px!important}
     .clientwall .cw-head h2{font-size:clamp(22px,6.6vw,34px)!important;line-height:1.02!important}
@@ -682,7 +682,7 @@
   @media(max-width:760px){
     /* CTA — compact so the heading + whole form sit together, no big gaps */
     .cta-end{min-height:auto!important;justify-content:flex-start!important}
-    .cta-end>.wrap{padding-top:68px!important;padding-bottom:46px!important}
+    .cta-end>.wrap{padding-top:68px!important;padding-bottom:46px!important;width:100%!important;max-width:100%!important}
     .cta-end .end-mark{margin-bottom:11px!important;font-size:10px!important;letter-spacing:.26em!important}
     .cta-end h2{font-size:clamp(30px,8.6vw,44px)!important;line-height:1.05!important;margin-bottom:4px!important}
     .cta-grid{grid-template-columns:1fr!important;margin-top:16px!important;gap:18px!important}
