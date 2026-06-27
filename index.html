@@ -681,16 +681,21 @@
   /* ===== MOBILE FIXES: compact CTA + studio framing ===== */
   @media(max-width:760px){
     /* CTA — compact so the heading + whole form sit together, no big gaps */
-    .cta-end{min-height:auto!important;justify-content:flex-start!important}
-    .cta-end>.wrap{padding-top:68px!important;padding-bottom:46px!important;width:100%!important;max-width:100%!important}
-    .cta-end .end-mark{margin-bottom:11px!important;font-size:10px!important;letter-spacing:.26em!important}
-    .cta-end h2{font-size:clamp(30px,8.6vw,44px)!important;line-height:1.05!important;margin-bottom:4px!important}
-    .cta-grid{grid-template-columns:1fr!important;margin-top:16px!important;gap:18px!important}
-    .cform{gap:11px!important;margin-top:4px!important}
-    .cform input,.cform textarea{padding:9px 2px!important;font-size:14px!important}
-    .cform textarea{min-height:42px!important}
-    .cform button{padding:12px 30px!important}
-    .cta-info{margin-top:0!important;gap:13px!important}
+    .cta-end{min-height:0!important;padding-top:0!important;padding-bottom:0!important;display:block!important}
+    .cta-end>.wrap{padding-top:30px!important;padding-bottom:26px!important;width:100%!important;max-width:100%!important}
+    .cta-end .end-mark{margin-bottom:8px!important;font-size:10px!important;letter-spacing:.26em!important}
+    .cta-end h2{font-size:clamp(26px,7.6vw,40px)!important;line-height:1.04!important;margin-bottom:2px!important}
+    .cta-grid{grid-template-columns:1fr!important;margin-top:12px!important;gap:14px!important}
+    .cform{gap:9px!important;margin-top:2px!important}
+    .cform input,.cform textarea{padding:8px 2px!important;font-size:14px!important}
+    .cform textarea{min-height:36px!important}
+    .cform button{padding:11px 26px!important}
+    .cta-info{margin-top:0!important;gap:9px!important}
+    .cta-info .label{margin-bottom:3px!important}
+    .cta-info>div p,.cta-info>div a{line-height:1.34!important}
+    /* Projects (03): kill the cumulative reveal stagger on single-column mobile
+       so lower cards don't stay invisible while you scroll past them */
+    #grid .card{transition-delay:0s!important}
     /* Studio — clear the founder photo from the fixed nav, focus the face */
     .studio-pin-stage{padding-top:68px!important}
     .studio-imgs .founder{aspect-ratio:3/4!important}
@@ -741,7 +746,7 @@
   var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
 
   /* ---- licensed soundtrack: "In that Future Bass" ---- */
-  var track=document.getElementById('track'),muted=false,started=false,VOL=.035,fadeIv;
+  var track=document.getElementById('track'),muted=false,started=false,VOL=.07,fadeIv;
   /* mobile (esp. iOS, which ignores JS volume): load a pre-lowered audio file */
   var MOBILE=/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)||innerWidth<=760;
   if(MOBILE){ track.src='assets/soundtrack_mobile.mp3'; VOL=1; }
