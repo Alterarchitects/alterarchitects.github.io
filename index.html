@@ -699,7 +699,7 @@
   /* ===== Custom A cursor (desktop only) ===== */
   @media(pointer:fine) and (min-width:761px){
     html.acursor, html.acursor *{cursor:none!important}
-    #acursor{position:fixed;left:0;top:0;width:24px;height:24px;margin:-12px 0 0 -12px;z-index:100000;
+    #acursor{position:fixed;left:0;top:0;width:36px;height:36px;margin:-18px 0 0 -18px;z-index:100000;
       background:url('assets/icon_a.png') center/contain no-repeat;mix-blend-mode:difference;
       opacity:0;pointer-events:none;will-change:transform;transition:opacity .3s ease}
     html.a11y-nomotion #acursor{display:none}
@@ -1691,11 +1691,11 @@
     var tx=innerWidth/2,ty=innerHeight/2,x=tx,y=ty,ts=1,s=1,shown=false;
     addEventListener('mousemove',function(e){
       tx=e.clientX; ty=e.clientY; if(!shown){shown=true; el.style.opacity='1';}
-      var t=e.target; ts=(t&&t.closest&&t.closest('a,button,.card,input,textarea,select,[role=button],[onclick]'))?1.7:1;
+      var t=e.target; ts=(t&&t.closest&&t.closest('a,button,.card,input,textarea,select,[role=button],[onclick]'))?1.35:1;
     },{passive:true});
     document.addEventListener('mouseleave',function(){el.style.opacity='0';shown=false;});
     (function loop(){ x+=(tx-x)*0.3; y+=(ty-y)*0.3; s+=(ts-s)*0.22;
-      el.style.transform='translate('+x+'px,'+y+'px) scale('+s+')'; requestAnimationFrame(loop); })();
+      el.style.transform='translate('+x+'px,'+y+'px) rotate(-22deg) scale('+s+')'; requestAnimationFrame(loop); })();
   }
 })();
 </script>
