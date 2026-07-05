@@ -928,12 +928,17 @@
     lastY=y;
   },{passive:true});
 
-  /* project cards: fade images in when loaded (no empty flash) */
-  document.querySelectorAll('.card img').forEach(function(im){
-    if(im.complete&&im.naturalWidth){im.classList.add('ld');return;}
-    im.addEventListener('load',function(){im.classList.add('ld')},{once:true});
-    im.addEventListener('error',function(){im.classList.add('ld')},{once:true});
-  });
+  /* project cards: fade images in when loaded (no empty flash).
+     runs after DOM is ready — the cards appear later in the document. */
+  function initCardFade(){
+    document.querySelectorAll('.card img').forEach(function(im){
+      if(im.complete&&im.naturalWidth){im.classList.add('ld');return;}
+      im.addEventListener('load',function(){im.classList.add('ld')},{once:true});
+      im.addEventListener('error',function(){im.classList.add('ld')},{once:true});
+    });
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initCardFade);
+  else initCardFade();
 })();
 </script>
 
