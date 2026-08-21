@@ -19,6 +19,8 @@
 </script>
 <meta name="description" content="Alter Architects is a leading interior architecture studio designing innovative, high-performance workplaces — from concept to keys. Founded by Itay Alter, Bezalel graduate.">
 <link rel="icon" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/favicon.png">
+<link rel="manifest" href="manifest.json">
 <link rel="preload" as="image" href="assets/intro.webp" fetchpriority="high">
 <link rel="preload" as="image" href="assets/hero/hero_1.webp">
 <meta name="theme-color" content="#0B0B0B">
@@ -33,19 +35,29 @@
 <meta name="twitter:description" content="Where vision becomes workspace. Refined. Innovative. Tailor Made.">
 <meta name="twitter:image" content="https://altertects.com/assets/og.jpg">
 <meta property="og:url" content="https://altertects.com/">
+<meta property="og:site_name" content="Alter Architects">
+<meta property="og:locale" content="en_US">
+<meta property="og:image:alt" content="Alter Architects — workplace interior architecture">
 <link rel="canonical" href="https://altertects.com/">
 <script type="application/ld+json">
 {
   "@context":"https://schema.org",
   "@type":"ProfessionalService",
   "name":"Alter Architects",
+  "alternateName":"ALTERTECTS",
   "description":"Interior architecture studio designing innovative, high-performance workplaces — from concept to keys. Founded by Itay Alter.",
   "url":"https://altertects.com/",
+  "logo":"https://altertects.com/assets/og.jpg",
+  "image":"https://altertects.com/assets/og.jpg",
   "telephone":"+972-54-900-1241",
   "email":"office@altertects.com",
-  "address":{"@type":"PostalAddress","streetAddress":"18 Rival St.","addressLocality":"Tel Aviv","addressCountry":"IL"},
-  "image":"https://altertects.com/assets/team.webp",
-  "founder":{"@type":"Person","name":"Itay Alter"},
+  "priceRange":"$$$",
+  "foundingDate":"2008",
+  "address":{"@type":"PostalAddress","streetAddress":"18 Rival St.","addressLocality":"Tel Aviv","addressRegion":"Tel Aviv District","addressCountry":"IL"},
+  "geo":{"@type":"GeoCoordinates","latitude":32.0709,"longitude":34.7936},
+  "areaServed":{"@type":"Country","name":"Israel"},
+  "openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Sunday","Monday","Tuesday","Wednesday","Thursday"],"opens":"09:00","closes":"18:00"}],
+  "founder":{"@type":"Person","name":"Itay Alter","jobTitle":"Owner · Head Architect & Designer"},
   "sameAs":["https://www.instagram.com/altertects/"]
 }
 </script>
@@ -62,7 +74,7 @@
     --max:1600px;
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth;background:#0b0b0b;overscroll-behavior-y:none;
+  html{scroll-behavior:smooth;background:#0b0b0b;overscroll-behavior-y:none;scroll-padding-top:80px;
     scrollbar-width:thin;scrollbar-color:var(--lime-deep) #0b0b0b}
   /* branded scrollbar (Chrome / Edge / Safari) */
   ::-webkit-scrollbar{width:12px;height:12px}
@@ -197,7 +209,7 @@
   /* sound toggle */
   #snd{position:fixed;right:20px;bottom:109px;z-index:120;width:44px;height:44px;border-radius:50%;
     border:1px solid rgba(255,255,255,.28);background:rgba(0,0,0,.5);color:#fff;cursor:pointer;
-    display:none;align-items:center;justify-content:center;font-size:15px;backdrop-filter:blur(6px)}
+    display:none;align-items:center;justify-content:center;font-size:15px;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
   body.revealed #snd{display:flex}
   #snd:hover{border-color:var(--lime);color:var(--lime)}
   @media(prefers-reduced-motion:reduce){#intro .ibg{transition:none}}
@@ -220,7 +232,8 @@
 
   /* ---------- SECTION FRAME ---------- */
   section{padding:120px 0}
-  .secnum{font-size:12px;color:var(--lime-deep);font-weight:700;letter-spacing:.1em}
+  .secnum{font-size:12px;color:#4a6a00;font-weight:700;letter-spacing:.1em}   /* AA on white */
+  .work .secnum{color:var(--lime)}   /* Work section is on black — keep lime */
   .sectitle{font-size:clamp(38px,5.8vw,96px);margin:16px 0 0}
   .lead{max-width:760px;color:#46463f;font-size:clamp(18px,1.5vw,23px);font-weight:300;margin-top:30px;line-height:1.6}
   .rule{height:3px;background:var(--lime);width:100%;margin:0}
@@ -288,7 +301,7 @@
   .cw-head{position:absolute;left:0;right:0;top:0;z-index:4;pointer-events:none;
     display:flex;flex-direction:column;align-items:center;text-align:center;padding-top:8vh;
     opacity:0;will-change:opacity,transform}
-  .cw-head .secnum{font-size:12px;letter-spacing:.34em;text-transform:uppercase;color:var(--lime-deep);margin-bottom:14px}
+  .cw-head .secnum{font-size:12px;letter-spacing:.34em;text-transform:uppercase;color:#4a6a00;margin-bottom:14px}   /* AA on white */
   .cw-head h2{font-size:clamp(34px,5.4vw,76px);font-weight:900;letter-spacing:-.03em;line-height:.98;color:#0B0B0B;margin:0}
   .cw-head .lead{margin-top:16px;max-width:620px;color:#5b5b57;font-size:clamp(14px,1.5vw,17px)}
   .cw-head h2 .dot{color:var(--lime-deep)}
@@ -343,8 +356,8 @@
   #gate .aenter:hover .gicon{transform:scale(1.06)}
   @keyframes apulse{0%,100%{opacity:.9}50%{opacity:1}}
   #gate .ghint2{color:#6f6f68;letter-spacing:.24em;font-size:10px;text-transform:uppercase;margin-top:-12px}
-  #intro h2 img.logomark{display:block;margin:0 auto;width:100%;height:auto;opacity:0;transform:scale(1.22);filter:blur(12px)}
-  #intro.playing h2 img.logomark{animation:slam .95s cubic-bezier(.2,.85,.2,1) .5s forwards}
+  #intro .intromark img.logomark{display:block;margin:0 auto;width:100%;height:auto;opacity:0;transform:scale(1.22);filter:blur(12px)}
+  #intro.playing .intromark img.logomark{animation:slam .95s cubic-bezier(.2,.85,.2,1) .5s forwards}
   @media(max-width:760px){
     .studio-pin{height:auto}
     .studio-pin-stage{position:relative;height:auto;min-height:0;display:block;overflow:visible;padding:48px 0 4px}
@@ -378,11 +391,11 @@
   @keyframes kenburns{from{transform:scale(1.001)}to{transform:scale(1.09)}}
   #pmodal .stage::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:1;box-shadow:inset 0 0 130px rgba(0,0,0,.55)}
   #pmodal .vnav{position:absolute;top:50%;transform:translateY(-50%);width:54px;height:54px;border:1px solid rgba(255,255,255,.32);
-    background:rgba(0,0,0,.4);color:#fff;cursor:pointer;font-size:24px;line-height:1;display:flex;align-items:center;justify-content:center;z-index:2;backdrop-filter:blur(4px)}
+    background:rgba(0,0,0,.4);color:#fff;cursor:pointer;font-size:24px;line-height:1;display:flex;align-items:center;justify-content:center;z-index:2;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
   #pmodal .vnav:hover{border-color:var(--lime);color:var(--lime)}
   #pmodal .vprev{left:16px}
   #pmodal .vnext{right:16px}
-  #pmodal .vcount{position:absolute;left:20px;bottom:18px;z-index:3;font-size:14px;letter-spacing:.14em;font-weight:800;color:#fff;background:rgba(0,0,0,.45);padding:9px 15px;backdrop-filter:blur(4px)}
+  #pmodal .vcount{position:absolute;left:20px;bottom:18px;z-index:3;font-size:14px;letter-spacing:.14em;font-weight:800;color:#fff;background:rgba(0,0,0,.45);padding:9px 15px;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
   #pmodal .vcount b{color:var(--lime);font-size:22px}
   #pmodal .thumbs{display:flex;gap:10px;margin-top:12px;overflow-x:auto;padding-bottom:6px}
   #pmodal .thumbs img{height:72px;width:108px;object-fit:cover;cursor:pointer;opacity:.45;border:2px solid transparent;flex:0 0 auto;transition:opacity .2s,border-color .2s}
@@ -393,7 +406,7 @@
   /* ---------- PROCESS ---------- */
   .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);margin-top:64px;border:1px solid var(--line)}
   .step{background:#fff;padding:34px 28px 40px;min-height:230px;display:flex;flex-direction:column;justify-content:space-between}
-  .step .sn{font-size:13px;color:var(--lime-deep);font-weight:700;letter-spacing:.14em}
+  .step .sn{font-size:13px;color:#4a6a00;font-weight:700;letter-spacing:.14em}   /* AA on white step */
   .step h3{font-size:22px;font-weight:800;margin-top:8px}
   .step p{font-size:14px;color:var(--gray);margin-top:14px;line-height:1.55}
   .step:hover{background:var(--black);color:#fff}
@@ -414,9 +427,10 @@
   .card h3{font-size:26px;font-weight:800}
   .card .sub{display:flex;gap:18px;margin-top:8px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#cfcfc8}
   .card .sub b{color:var(--lime)}
-  .work .more{margin-top:46px;display:inline-flex;align-items:center;gap:14px;
+  .work .more{margin-top:46px;display:inline-flex;align-items:center;gap:14px;background:transparent;cursor:pointer;font-family:inherit;
     border:1px solid #333;color:#fff;padding:16px 30px;font-size:13px;letter-spacing:.16em;text-transform:uppercase}
   .work .more:hover{background:var(--lime);color:#000;border-color:var(--lime)}
+  @media(prefers-reduced-motion:reduce){#pmodal #pmStageImgs img.on{animation:none!important}}
 
   /* ---------- MODULAR ---------- */
   .modular{display:grid;grid-template-columns:1fr 1fr;gap:0;align-items:stretch}
@@ -428,13 +442,13 @@
   .cta h2{font-size:clamp(48px,9vw,124px);line-height:.92}
   .cta h2 .lime{color:var(--lime)}
   .cta .info{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:70px;border-top:1px solid #2a2a2a;padding-top:40px}
-  .cta .info .label{color:var(--gray)}
+  .cta .info .label{color:#8f8f88}   /* AA on black */
   .cta .info>div{display:flex;flex-direction:column}
   .cta .info .label{margin-bottom:14px}
   .cta .info a,.cta .info p{display:block;color:#eee;font-size:16px;margin:0 0 8px;line-height:1.4}
   .cta .info a:last-child,.cta .info p:last-child{margin-bottom:0}
   .cta .info a:hover{color:var(--lime)}
-  footer{background:#070707;color:#6f6f68;font-size:12px;letter-spacing:.08em;padding:28px 0}
+  footer{background:#070707;color:#8f8f88;font-size:12px;letter-spacing:.08em;padding:28px 0}   /* AA */
   footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 
   .note{background:var(--lime);color:#0b0b0b;text-align:center;font-size:13px;letter-spacing:.04em;padding:10px 20px;font-weight:600}
@@ -668,6 +682,7 @@
   /* === CLIENT LOGOS — sharp colour wave sweeping left -> right (desktop) === */
   @keyframes cwave{0%,36%{filter:grayscale(1) opacity(.72)}45%,55%{filter:grayscale(0) opacity(1)}64%,100%{filter:grayscale(1) opacity(.72)}}
   @media(min-width:761px){.clientwall .cl-real{animation:cwave 5.5s linear infinite}}
+  .clientwall.cw-out .cl-real{animation-play-state:paused!important}   /* pause off-screen (perf) */
 
   .cta-end h2{font-size:clamp(38px,6vw,84px)!important}
   .cta-grid{align-items:start;margin-top:clamp(26px,4vh,48px)!important}
@@ -746,9 +761,34 @@
     html.a11y-nomotion #acursor{display:none}
     html.a11y-nomotion.acursor, html.a11y-nomotion.acursor *{cursor:auto!important}
   }
+  /* ===== Skip link (WCAG 2.4.1 A) ===== */
+  .skip{position:fixed;top:-70px;left:12px;z-index:100001;background:#0b0b0b;color:#fff;border:2px solid var(--lime);padding:11px 18px;border-radius:8px;font-weight:800;font-size:14px;letter-spacing:.02em;text-decoration:none;transition:top .18s ease}
+  .skip:focus{top:12px;outline:none}
+  /* ===== reduced-motion: honor OS setting for the custom cursor too ===== */
+  @media(prefers-reduced-motion:reduce){
+    #acursor{display:none!important}
+    html.acursor, html.acursor *{cursor:auto!important}
+  }
+  /* ===== Print: readable ink-on-paper ===== */
+  @media print{
+    #intro,#progress,nav,#mnav,#wa,#snd,#a11y-fab,#a11y-panel,#acursor,.cta-bg,.hero .slide,.studio-alter{display:none!important}
+    html,body{background:#fff!important;color:#000!important;overflow:auto!important}
+    *{animation:none!important;transition:none!important;filter:none!important;opacity:1!important;transform:none!important;box-shadow:none!important}
+    .clientwall,.work,.cta,.cta-end,.hl,.hl-big,#manifesto,#slogan,.studio-pin{height:auto!important;min-height:0!important}
+    .cw-pin,.studio-pin-stage,.hl-stage,#process>.wrap{position:static!important;height:auto!important}
+    .sectitle,h1,h2,h3{color:#000!important}
+  }
 </style>
+<noscript><style>
+  /* Without JS the cinematic intro can't be dismissed — show the real site instead */
+  body{overflow:auto!important}
+  #intro,#progress{display:none!important}
+  .reveal,.rule{opacity:1!important;transform:none!important}
+  .hero .slide:first-of-type{opacity:1!important}
+</style></noscript>
 </head>
 <body>
+<a class="skip" href="#hero">Skip to content</a>
 
 <!-- WELCOME PRELOADER (cinematic + sound) -->
 <div id="progress"></div>
@@ -767,7 +807,7 @@
 
   <div class="icore">
     <div class="welcome">Welcome to</div>
-    <h2><img class="logomark" src="assets/logo_welcome.png" alt="Alter Architects"></h2>
+    <div class="intromark"><img class="logomark" src="assets/logo_welcome.png" alt="Alter Architects"></div>
     <div class="accent"></div>
     <div class="sub">Where vision becomes <b>workspace.</b></div>
   </div>
@@ -914,10 +954,23 @@
     document.body.classList.toggle('menuopen',o);
     btn.setAttribute('aria-expanded',o?'true':'false');
     btn.setAttribute('aria-label',o?'Close menu':'Open menu');
+    if(o){var fl=mnav.querySelector('a.ml'); if(fl)setTimeout(function(){fl.focus();},40);}
+    else if(document.activeElement&&mnav.contains(document.activeElement)){btn.focus();}
   }
   btn.addEventListener('click',function(){setOpen(!document.body.classList.contains('menuopen'))});
   mnav.querySelectorAll('a.ml').forEach(function(a){a.addEventListener('click',function(){setOpen(false)})});
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&document.body.classList.contains('menuopen'))setOpen(false)});
+  /* focus trap for open dialogs (mobile menu + project modal) — WCAG 2.4.3 */
+  document.addEventListener('keydown',function(e){
+    if(e.key!=='Tab')return;
+    var box=document.body.classList.contains('menuopen')?mnav:(function(){var m=document.getElementById('pmodal');return (m&&m.classList.contains('open'))?m:null;})();
+    if(!box)return;
+    var f=[].slice.call(box.querySelectorAll('a[href],button:not([disabled]),input,textarea,select,[tabindex]:not([tabindex="-1"])')).filter(function(el){return el.offsetParent!==null;});
+    if(!f.length)return;
+    var first=f[0],last=f[f.length-1];
+    if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}
+    else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}
+  });
 
   /* header: hide on scroll down, show on scroll up */
   var nav=document.querySelector('nav'),lastY=0;
@@ -998,7 +1051,8 @@
     setTimeout(function(){nm.textContent=slides[n].name;mt.textContent=slides[n].meta;nm.style.opacity=1;mt.style.opacity=1;},250);
     cur=n;
     clearTimeout(timer);
-    timer=setTimeout(function(){go((n+1)%slides.length)},4600);
+    if(!(matchMedia('(prefers-reduced-motion:reduce)').matches || document.documentElement.classList.contains('a11y-nomotion')))
+      timer=setTimeout(function(){go((n+1)%slides.length)},4600);   /* honor reduced-motion / a11y "stop animations" */
   }
   if(document.body.classList.contains('revealed'))go(0);
   else window.addEventListener('alterReveal',function(){go(0)},{once:true});
@@ -1047,67 +1101,67 @@
       <p class="lead">A selection of the companies we've designed workspaces for.</p>
     </div>
     <div class="cw-grid">
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_00.webp" alt="Client logo" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_00.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_01.webp" alt="Client logo" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_01.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_02.webp" alt="Client logo" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_02.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_03.webp" alt="Client logo" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_03.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_04.webp" alt="Client logo" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_04.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_05.webp" alt="Client logo" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_05.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_06.webp" alt="Client logo" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_06.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_07.webp" alt="Client logo" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_07.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_08.webp" alt="Client logo" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_08.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_09.webp" alt="Client logo" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_09.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_10.webp" alt="Client logo" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_10.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_11.webp" alt="Client logo" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_11.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_12.webp" alt="Client logo" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_12.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_13.webp" alt="Client logo" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_13.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_14.webp" alt="Client logo" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_14.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_15.webp" alt="Client logo" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_15.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_16.webp" alt="Client logo" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_16.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_17.webp" alt="Client logo" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_17.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_18.webp" alt="Client logo" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_18.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_19.webp" alt="Client logo" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_19.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_20.webp" alt="Client logo" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_20.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_21.webp" alt="Client logo" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_21.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_22.webp" alt="Client logo" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_22.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_23.webp" alt="Client logo" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_23.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_24.webp" alt="Client logo" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_24.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_25.webp" alt="Client logo" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_25.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_26.webp" alt="Client logo" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_26.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_27.webp" alt="Client logo" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_27.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_28.webp" alt="Client logo" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_28.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_29.webp" alt="Client logo" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_29.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_30.webp" alt="Client logo" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_30.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_31.webp" alt="Client logo" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_31.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_32.webp" alt="Client logo" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_32.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_33.webp" alt="Client logo" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_33.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_34.webp" alt="Client logo" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_34.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_35.webp" alt="Client logo" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_35.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_36.webp" alt="Client logo" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_36.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_37.webp" alt="Client logo" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_37.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_38.webp" alt="Client logo" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_38.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_39.webp" alt="Client logo" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_39.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_41.webp" alt="Client logo" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_41.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_42.webp" alt="Client logo" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_42.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_43.webp" alt="Client logo" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_43.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_44.webp" alt="Client logo" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_44.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_45.webp" alt="Client logo" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_45.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_46.webp" alt="Client logo" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_46.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_47.webp" alt="Client logo" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_47.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_48.webp" alt="Client logo" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_48.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_49.webp" alt="Client logo" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_49.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_50.webp" alt="Client logo" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_50.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_51.webp" alt="Client logo" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_51.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_52.webp" alt="Client logo" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_52.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_53.webp" alt="Client logo" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_53.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_54.webp" alt="Client logo" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_54.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_55.webp" alt="Client logo" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_55.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_56.webp" alt="Client logo" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_56.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_57.webp" alt="Client logo" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_57.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_58.webp" alt="Client logo" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_58.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_59.webp" alt="Client logo" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_59.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_60.webp" alt="Client logo" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_60.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_61.webp" alt="Client logo" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_61.png)"></i></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_00.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_00.png)"></i></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_01.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_01.png)"></i></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_02.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_02.png)"></i></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_03.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_03.png)"></i></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_04.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_04.png)"></i></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_05.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_05.png)"></i></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_06.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_06.png)"></i></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_07.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_07.png)"></i></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_08.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_08.png)"></i></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_09.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_09.png)"></i></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_10.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_10.png)"></i></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_11.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_11.png)"></i></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_12.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_12.png)"></i></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_13.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_13.png)"></i></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_14.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_14.png)"></i></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_15.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_15.png)"></i></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_16.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_16.png)"></i></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_17.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_17.png)"></i></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_18.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_18.png)"></i></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_19.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_19.png)"></i></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_20.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_20.png)"></i></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_21.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_21.png)"></i></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_22.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_22.png)"></i></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_23.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_23.png)"></i></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_24.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_24.png)"></i></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_25.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_25.png)"></i></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_26.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_26.png)"></i></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_27.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_27.png)"></i></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_28.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_28.png)"></i></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_29.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_29.png)"></i></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_30.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_30.png)"></i></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_31.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_31.png)"></i></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_32.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_32.png)"></i></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_33.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_33.png)"></i></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_34.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_34.png)"></i></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_35.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_35.png)"></i></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_36.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_36.png)"></i></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_37.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_37.png)"></i></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_38.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_38.png)"></i></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_39.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_39.png)"></i></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_41.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_41.png)"></i></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_42.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_42.png)"></i></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_43.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_43.png)"></i></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_44.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_44.png)"></i></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_45.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_45.png)"></i></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_46.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_46.png)"></i></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_47.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_47.png)"></i></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_48.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_48.png)"></i></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_49.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_49.png)"></i></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_50.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_50.png)"></i></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_51.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_51.png)"></i></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_52.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_52.png)"></i></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_53.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_53.png)"></i></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_54.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_54.png)"></i></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_55.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_55.png)"></i></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_56.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_56.png)"></i></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_57.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_57.png)"></i></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_58.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_58.png)"></i></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_59.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_59.png)"></i></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_60.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_60.png)"></i></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_61.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_61.png)"></i></span>
     </div>
   </div>
 </section>
@@ -1120,32 +1174,9 @@
   function usePin(){return !reduce && innerWidth>760 && innerHeight>=440;}
   function setupPin(){
     sec.classList.remove('seq','lit');
-    var logos=grid.querySelectorAll('.cw-logo'), N=logos.length, spread=0.55;
-    function fx(){
-      var total=sec.offsetHeight-innerHeight;
-      var p=total>0?(-sec.getBoundingClientRect().top/total):0;
-      p=p<0?0:p>1?1:p;
-      var headIn=ss(p,0.04,0.16);  /* 1. heading appears */
-      var lift  =ss(p,0.12,0.34);
-      var appear=ss(p,0.10,0.32);  /* logos cascade in */
-      var ignite=ss(p,0.52,0.74);  /* dwell in colour, then -> our green */
-      var disap =ss(p,0.80,0.95);  /* then fade out */
-      head.style.opacity=headIn.toFixed(3);
-      head.style.transform='translateY('+((1-headIn)*16).toFixed(1)+'px)';
-      grid.style.opacity=1;
-      grid.style.transform='translateY('+((1-lift)*22).toFixed(1)+'px)';
-      for(var i=0;i<N;i++){
-        var f=N>1?i/(N-1):0;
-        var a=appear*(1+spread)-f*spread; a=a<0?0:a>1?1:a; a=a*a*(3-2*a);
-        var g=ignite*(1+spread)-f*spread; g=g<0?0:g>1?1:g; g=g*g*(3-2*g);
-        var d=disap*(1+spread)-f*spread; d=d<0?0:d>1?1:d; d=d*d*(3-2*d);
-        var st=logos[i].style;
-        st.setProperty('--real',(a*(1-g)*(1-d)).toFixed(3));
-        st.setProperty('--lime',(a*g*(1-d)).toFixed(3));
-      }
-    }
-    addEventListener('scroll',fx,{passive:true});fx();
-    sec._fx=fx;
+    /* The "clean client wall" CSS (grayscale + left→right colour-wave, all !important)
+       drives the visuals now, so the old per-frame --real/--lime choreography over 61
+       logos is fully overridden — dead weight on every scroll frame. Skipped for perf. */
   }
   function setupSeq(){
     sec.classList.add('seq');
@@ -1158,6 +1189,8 @@
   function onResize(){var m=usePin()?'pin':'seq';if(m===mode){if(mode==='pin'&&sec._fx)sec._fx();return;}mode=m;m==='pin'?setupPin():setupSeq();}
   addEventListener('resize',onResize);
   onResize();
+  /* pause the 61-logo colour-wave filter animation while the wall is off-screen (perf) */
+  try{new IntersectionObserver(function(es){es.forEach(function(e){sec.classList.toggle('cw-out',!e.isIntersecting);});},{threshold:0,rootMargin:'150px'}).observe(sec);}catch(e){}
 })();
 </script>
 
@@ -1319,7 +1352,7 @@
       <div class="meta"><h3>Bler</h3><div class="sub"><span><b>400</b> sqm</span><span>Petah Tikva</span></div></div>
     </a>
   </div>
-  <a class="more" id="viewAll" onclick="toggleAll()">View all projects →</a>
+  <button type="button" class="more" id="viewAll" onclick="toggleAll()">View all projects →</button>
 </div></section>
 
 <!-- PROCESS -->
@@ -1368,7 +1401,7 @@
 </div></section>
 
 <footer><div class="wrap">
-  <span>© 2026 Alter Architects. All rights reserved. · <a href="accessibility.html" style="color:inherit;text-decoration:none;border-bottom:1px solid #2b2b27;opacity:.8">הצהרת נגישות</a></span>
+  <span>© 2026 Alter Architects. All rights reserved. · <a href="accessibility.html" lang="he" style="color:inherit;text-decoration:none;border-bottom:1px solid #2b2b27;opacity:.8">הצהרת נגישות</a></span>
   <span><span style="color:var(--lime)">Refined.</span> Innovative. Tailor Made.</span>
 </div></footer>
 
@@ -1395,14 +1428,17 @@
   var io=new IntersectionObserver(function(es){
     es.forEach(function(e){
       if(e.isIntersecting){e.target.classList.add('in');
-        if(e.target.matches('.stats'))countUp(e.target);
+        /* mobile: stats scroll into view normally. desktop: they sit in the always-pinned
+           studio stage, so the count is triggered from the pin progress instead */
+        if(e.target.matches('.stats') && innerWidth<=760) countUp(e.target);
         io.unobserve(e.target);}
     });
   },{threshold:.18,rootMargin:'0px 0px -8% 0px'});
   document.querySelectorAll('.reveal,.rule').forEach(function(el){io.observe(el)});
 
-  /* count-up */
+  /* count-up (idempotent — runs once, only when actually visible) */
   function countUp(scope){
+    if(window.__statsCounted)return; window.__statsCounted=true;
     (scope||document).querySelectorAll('.cnt').forEach(function(c){
       var to=+c.dataset.to,from=+(c.dataset.from||0),suf=c.dataset.suf||'',t0=null,dur=(+(c.dataset.dur||1600));
       function tick(ts){if(!t0)t0=ts;var p=Math.min((ts-t0)/dur,1);
@@ -1412,6 +1448,7 @@
       requestAnimationFrame(tick);
     });
   }
+  window.__countStats=function(){var s=document.querySelector('.stats'); if(s)countUp(s);};
   var statsWrap=document.querySelector('.stats');
   if(statsWrap)io.observe(statsWrap);
 
@@ -1485,7 +1522,8 @@
     bler:{n:'29',t:'Bler',sz:'400 sqm',lo:'Petah Tikva',d:'Bler — workplace interior architecture by Alter Architects, Petah Tikva.',g:['assets/projects/bler/web_01.webp','assets/projects/bler/web_02.webp','assets/projects/bler/web_03.webp','assets/projects/bler/web_04.webp','assets/projects/bler/web_05.webp','assets/projects/bler/web_06.webp']}
   };
   var modal=document.getElementById('pmodal');
-  (function(){var st=document.getElementById('pmStage');if(st){st.addEventListener('mouseenter',function(){clearTimeout(window.__autoT);});st.addEventListener('mouseleave',function(){if(modal.classList.contains('open')){clearTimeout(window.__autoT);window.__autoT=setTimeout(function(){window.pmStep(1);},3400);}});}})();
+  function pmMotionOK(){return !(matchMedia('(prefers-reduced-motion:reduce)').matches || document.documentElement.classList.contains('a11y-nomotion'));}
+  (function(){var st=document.getElementById('pmStage');if(st){st.addEventListener('mouseenter',function(){clearTimeout(window.__autoT);});st.addEventListener('mouseleave',function(){if(modal.classList.contains('open')&&pmMotionOK()){clearTimeout(window.__autoT);window.__autoT=setTimeout(function(){window.pmStep(1);},3400);}});}})();
   var POOL=['5648d3_0c147a1f9b8e4b0fb6c628f07552cf88','5648d3_9f3bdb61695a4051a6659ebd32f44582','5648d3_bc3c2a2ea978418eaaa8437323c2d274','5648d3_84531a42a5a7447087efdd41f8f313ed','5648d3_36b561a56dcc4b32b5524947e87692d5','5648d3_226a624fdbbb43d69c34c1f8f7276129','5648d3_3560f87e965248eeae4a9437fdc37065','5648d3_0cbf4c8893f24c38a162e5c3e18db6a2','5648d3_a7a5e61da68f460c9fea55a88eec7044','5648d3_7d338d772094424db5c3db8869fb1092'];
   var pmImgs=[],pmI=0;
   function buildList(p){return p.g.slice();}
@@ -1495,7 +1533,7 @@
     document.querySelectorAll('#pmThumbs img').forEach(function(t,k){t.classList.toggle('on',k===i); if(k===i)t.scrollIntoView({inline:'center',block:'nearest'});});
     document.getElementById('pmIdx').textContent=('0'+(i+1)).slice(-2);
     var vb=document.querySelector('#pmStage .vauto b'); if(vb){vb.style.animation='none'; void vb.offsetWidth; vb.style.animation='';}
-    if(modal.classList.contains('open')){clearTimeout(window.__autoT); window.__autoT=setTimeout(function(){pmStep(1);},3400);}
+    if(modal.classList.contains('open')&&pmMotionOK()){clearTimeout(window.__autoT); window.__autoT=setTimeout(function(){pmStep(1);},3400);}
   };
   window.pmStep=function(d){ pmShow(pmI+d); };
   window.openProject=function(k){
@@ -1600,6 +1638,7 @@
     if(imgs){imgs.style.opacity=ph.toFixed(3);imgs.style.transform='translateY('+((1-ph)*70).toFixed(1)+'px)';}
     var sw=pin.querySelector('.studio-stats-wrap'), stp=ss(p,0.16,0.32);
     if(sw){sw.style.opacity=stp.toFixed(3);sw.style.transform='translateY('+((1-stp)*26).toFixed(1)+'px)';}
+    if(stp>0.5 && window.__countStats) window.__countStats();   /* count only once the stats are actually visible */
   }
   addEventListener('scroll',fx,{passive:true});addEventListener('resize',fx);fx();
 })();

@@ -1,0 +1,12 @@
+{
+  "name": "Alter Architects",
+  "short_name": "Alter",
+  "description": "Interior architecture studio designing innovative, high-performance workplaces — from concept to keys.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0B0B0B",
+  "theme_color": "#0B0B0B",
+  "icons": [
+    { "src": "assets/favicon.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}
