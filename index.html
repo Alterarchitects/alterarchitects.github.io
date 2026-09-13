@@ -4,14 +4,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Alter Architects — Refined. Innovative. Tailor Made.</title>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-PXGGG4F9SC"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-PXGGG4F9SC');
-</script>
 <script>
   if('scrollRestoration' in history){history.scrollRestoration='manual';}
   window.addEventListener('load',function(){window.scrollTo(0,0);});
@@ -22,7 +14,15 @@
 <link rel="apple-touch-icon" href="assets/favicon.png">
 <link rel="manifest" href="manifest.json">
 <link rel="preload" as="image" href="assets/intro.webp" fetchpriority="high">
-<link rel="preload" as="image" href="assets/hero/hero_1.webp">
+<link rel="preload" as="image" href="assets/hero/hero_1.webp" fetchpriority="low">
+<!-- Google tag (gtag.js) — placed after the critical image preloads so the LCP image is discovered first -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PXGGG4F9SC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-PXGGG4F9SC');
+</script>
 <meta name="theme-color" content="#0B0B0B">
 <meta property="og:title" content="Alter Architects — Refined. Innovative. Tailor Made.">
 <meta property="og:description" content="Where vision becomes workspace. Refined. Innovative. Tailor Made.">
@@ -718,15 +718,23 @@
 
   /* CTA — fit comfortably on laptops / short screens (14 inch etc.) */
   @media(min-width:761px) and (max-height:960px){
+    .cta-end{padding-top:0!important;padding-bottom:0!important}   /* the section's own 120+120px was the overflow — the wrap carries the spacing */
     .cta-end h2{font-size:clamp(30px,4.4vw,56px)!important;line-height:1.03!important}
     .cta-end .end-mark{margin-bottom:16px!important}
     .cta-grid{margin-top:20px!important;gap:clamp(28px,4vw,50px)!important}
-    .cta-end>.wrap{padding-top:11vh!important;padding-bottom:5vh!important}
+    .cta-end>.wrap{padding-top:9vh!important;padding-bottom:5vh!important}
     .cform{gap:13px!important}
     .cform input,.cform textarea{padding:10px 2px!important}
     .cform textarea{min-height:46px!important}
     .cform button{padding:13px 34px!important}
-    .cta-info{gap:14px!important}
+    .cta-info{gap:12px!important}
+  }
+  /* Tablets (761–1024px): the 2-column CTA is cramped and too tall — stack it */
+  @media(min-width:761px) and (max-width:1024px){
+    .cta-end{padding-top:0!important;padding-bottom:0!important}
+    .cta-end>.wrap{padding-top:8vh!important;padding-bottom:6vh!important}
+    .cta-grid{grid-template-columns:1fr!important;gap:26px!important}
+    .cta-info{grid-template-columns:repeat(3,1fr)!important;gap:18px!important}
   }
 
   /* ===== MOBILE FIXES: compact CTA + studio framing ===== */
@@ -769,6 +777,37 @@
     #acursor{display:none!important}
     html.acursor, html.acursor *{cursor:auto!important}
   }
+  /* ===== Cinematic chapter dissolves (edge-matched, seamless) ===== */
+  .xfade{height:120px;width:100%;position:relative;z-index:1;pointer-events:none;margin:0;padding:0;border:0}
+  .xfade.d2w{background:linear-gradient(#060606,#ffffff)}   /* dark  -> white */
+  .xfade.w2d{background:linear-gradient(#ffffff,#060606)}   /* white -> dark  */
+  .xfade.b2w{background:linear-gradient(#0b0b0b,#ffffff)}   /* black -> white */
+  .xfade.w2b{background:linear-gradient(#ffffff,#0b0b0b)}   /* white -> black */
+  @media(max-width:760px){.xfade{height:76px}}
+  @media print{.xfade{display:none!important}}
+
+  /* ===== WOW 1: cursor becomes a "VIEW →" pill over project cards + cards tilt toward the mouse ===== */
+  @media(pointer:fine) and (min-width:761px){
+    #acursor.view{width:98px;height:38px;margin:-19px 0 0 -49px;border-radius:999px;background:var(--lime);background-image:none!important;mix-blend-mode:normal;
+      display:flex;align-items:center;justify-content:center;font:800 11px/1 "Helvetica Neue",Arial,sans-serif;letter-spacing:.18em;color:#0b0b0b;
+      box-shadow:0 8px 24px rgba(0,0,0,.35);transition:opacity .3s ease,width .18s ease,height .18s ease,margin .18s ease,border-radius .18s ease}
+    #acursor.view::after{content:"VIEW →"}
+    #grid .card{transform-style:preserve-3d}
+    #grid .card .num,#grid .card .meta{transform:translateZ(28px)}   /* number + title float above the tilted card */
+  }
+  /* ===== WOW 2: "spotlight" on the logo wall — logos near the cursor light up in full colour ===== */
+  .clientwall .cw-logo.spot .cl-real{filter:grayscale(0) opacity(1)!important;animation-play-state:paused!important;transition:filter .22s ease}
+  /* ===== WOW 4: floating "Start a project" pill (appears after the hero, hides near the contact section) ===== */
+  #startpill{position:fixed;left:20px;bottom:24px;z-index:139;display:inline-flex;align-items:center;gap:10px;background:var(--lime);color:#0b0b0b;
+    font-weight:800;font-size:12px;letter-spacing:.16em;text-transform:uppercase;padding:14px 20px;border-radius:999px;box-shadow:0 10px 30px rgba(0,0,0,.38);
+    opacity:0;transform:translateY(16px);pointer-events:none;transition:opacity .35s ease,transform .35s ease,background .2s ease,color .2s ease}
+  #startpill.on{opacity:1;transform:none;pointer-events:auto}
+  #startpill:hover{background:#fff}
+  #startpill .arr{transition:transform .2s ease}
+  #startpill:hover .arr{transform:translateX(4px)}
+  body.modal-open #startpill,body.menuopen #startpill{opacity:0!important;pointer-events:none!important}
+  @media(max-width:760px){#startpill{left:14px;bottom:18px;padding:12px 16px;font-size:11px}}
+  @media print{#startpill{display:none!important}}
   /* ===== Print: readable ink-on-paper ===== */
   @media print{
     #intro,#progress,nav,#mnav,#wa,#snd,#a11y-fab,#a11y-panel,#acursor,.cta-bg,.hero .slide,.studio-alter{display:none!important}
@@ -880,10 +919,18 @@
      phones get lighter variants from assets/opening/m/ (~70% smaller) */
   var SEEN='alterSeen1';
   var seen=false; try{seen=!!sessionStorage.getItem(SEEN);}catch(e){}
-  var OP=(MOBILE||innerWidth<=760)?'assets/opening/m/':'assets/opening/';
+  /* lighter 1100px frames wherever the physical resolution can't tell the difference at 165ms/frame
+     (phones, 1x laptops); true 2x/4K screens get the full set */
+  var OP=(MOBILE||(innerWidth*(window.devicePixelRatio||1))<=1600)?'assets/opening/m/':'assets/opening/';
   var journeyImgs=[];
   for(var oi=1;oi<=19;oi++) journeyImgs.push(OP+'opening_'+('0'+oi).slice(-2)+'.webp');
-  if(!seen) journeyImgs.forEach(function(u){var im=new Image();im.src=u;});  /* preload (skipped on repeat visits) */
+  /* PERF: preload AFTER first paint (not at parse) so the intro/LCP image wins the connection.
+     Also kicks off on the first pointer/touch so a quick clicker still gets loaded frames. */
+  var _mtStarted=false;
+  function preloadMontage(){ if(_mtStarted||seen)return; _mtStarted=true; journeyImgs.forEach(function(u){var im=new Image();im.src=u;}); }
+  addEventListener('load',function(){setTimeout(preloadMontage,120);},{once:true});
+  addEventListener('pointermove',preloadMontage,{once:true,passive:true});
+  addEventListener('touchstart',preloadMontage,{once:true,passive:true});
 
   /* readable cut montage — each image registers before the next */
   function journey(done){
@@ -1037,7 +1084,8 @@
   function loadRest(){
     els.forEach(function(e,i){ if(!e.style.backgroundImage) e.style.backgroundImage="url('"+slides[i].img+"')"; });
   }
-  window.addEventListener('alterReveal',function(){setTimeout(loadRest,1200)},{once:true});
+  /* PERF: the remaining slides warm gently in the background later; the NEXT slide is warmed one-ahead in go() */
+  window.addEventListener('alterReveal',function(){setTimeout(loadRest,7000)},{once:true});
   var cur=-1,timer;
   function go(n){
     if(n===cur)return;
@@ -1051,6 +1099,8 @@
     setTimeout(function(){nm.textContent=slides[n].name;mt.textContent=slides[n].meta;nm.style.opacity=1;mt.style.opacity=1;},250);
     cur=n;
     clearTimeout(timer);
+    /* PERF: warm just the next slide so its transition is instant (no 4-slide burst at reveal) */
+    (function(){var nx=(n+1)%slides.length; if(!els[nx].style.backgroundImage){var im=new Image(); im.onload=function(){els[nx].style.backgroundImage="url('"+slides[nx].img+"')";}; im.src=slides[nx].img;}})();
     if(!(matchMedia('(prefers-reduced-motion:reduce)').matches || document.documentElement.classList.contains('a11y-nomotion')))
       timer=setTimeout(function(){go((n+1)%slides.length)},4600);   /* honor reduced-motion / a11y "stop animations" */
   }
@@ -1068,6 +1118,7 @@
 
 <!-- STUDIO -->
 <div class="rule"></div>
+<div class="xfade d2w"></div>
 <section id="studio"><div class="wrap studio">
   <div class="secnum">01 — THE STUDIO</div>
   <h2 class="sectitle">The Studio<span class="dot">.</span></h2>
@@ -1077,9 +1128,9 @@
     <svg class="studio-alter" viewBox="0 0 1000 250" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><text x="500" y="206" text-anchor="middle" textLength="1000" lengthAdjust="spacingAndGlyphs" font-family="Helvetica Neue,Arial,sans-serif" font-weight="900" font-size="250" letter-spacing="-6" fill="#C8F23C">ALTER</text></svg>
   <div class="studio-imgs">
     <div class="team">
-      <img class="ta" src="assets/team.webp" alt="The Alter Architects team">
+      <img class="ta" src="assets/team.webp" alt="The Alter Architects team" loading="lazy" decoding="async">
     </div>
-    <div class="founder"><img class="fphoto" src="assets/itay.webp" alt="Itay Alter"><div class="sheen"></div>
+    <div class="founder"><img class="fphoto" src="assets/itay.webp" alt="Itay Alter" loading="lazy" decoding="async"><div class="sheen"></div>
       <div class="fcap"><div class="nm">Itay Alter</div><div class="rl">Owner · Head Architect &amp; Designer</div></div>
     </div>
   </div>
@@ -1196,6 +1247,7 @@
 
 <!-- WORK (moved up) -->
 <!-- MANIFESTO: scroll color highlight -->
+<div class="xfade w2d"></div>
 <section class="hl pin-type" id="manifesto"><div class="hl-stage">
   <div class="hl-inner"><div class="lab">Our approach</div>
   <h2 class="hl-text typed" data-text="We don't just design offices — we design how people work, connect and grow, turning every space into a company's real competitive advantage."><span class="t"></span><span class="caret"></span></h2></div>
@@ -1357,6 +1409,7 @@
 
 <!-- PROCESS -->
 <div class="rule"></div>
+<div class="xfade b2w"></div>
 <section id="process"><div class="wrap">
   <div class="secnum">04 — METHOD</div>
   <h2 class="sectitle">From brief to keys<span class="dot">.</span></h2>
@@ -1374,8 +1427,9 @@
 </div></section>
 
 <!-- CTA -->
+<div class="xfade w2b"></div>
 <section class="cta cta-end" id="contact">
-  <div class="cta-bg" style="background-image:url('assets/hero/hero_6.webp')"></div>
+  <div class="cta-bg" data-bg="assets/hero/hero_6.webp"></div>
   <div class="cta-scrim"></div>
   <div class="wrap">
   <div class="end-mark">/// The next one is yours</div>
@@ -1544,8 +1598,9 @@
     document.getElementById('pmLoc').textContent=p.lo;
     document.getElementById('pmDesc').textContent=p.d;
     pmImgs=buildList(p);
-    document.getElementById('pmStageImgs').innerHTML=pmImgs.map(function(id){return '<img src="'+im(id)+'" alt="'+p.t+'">';}).join('');
-    document.getElementById('pmThumbs').innerHTML=pmImgs.map(function(id,k){return '<img src="'+im(id)+'" alt="" onclick="pmShow('+k+')">';}).join('');
+    /* PERF: only the first stage image is eager; the rest + all thumbs are lazy/async so opening a project decodes 1 image, not 12 */
+    document.getElementById('pmStageImgs').innerHTML=pmImgs.map(function(id,k){return '<img src="'+im(id)+'" alt="'+p.t+'" decoding="async"'+(k>0?' loading="lazy"':'')+'>';}).join('');
+    document.getElementById('pmThumbs').innerHTML=pmImgs.map(function(id,k){return '<img src="'+im(id)+'" alt="" loading="lazy" decoding="async" onclick="pmShow('+k+')">';}).join('');
     document.getElementById('pmTot').textContent=('0'+pmImgs.length).slice(-2);
     modal.classList.add('open'); document.body.classList.add('modal-open'); modal.scrollTop=0;
     pmShow(0);
@@ -1569,6 +1624,12 @@
   var pb=document.getElementById('progress');
   function pbar(){var d=document.documentElement,sc=d.scrollTop||document.body.scrollTop||0,max=d.scrollHeight-d.clientHeight;if(pb)pb.style.width=(max>0?sc/max*100:0)+'%';}
   window.addEventListener('scroll',pbar,{passive:true});pbar();
+  /* PERF: the CTA background image loads only when the section is within ~900px (was fetched at t=0) */
+  (function(){var bg=document.querySelector('.cta-bg[data-bg]'); if(!bg)return;
+    function set(){bg.style.backgroundImage="url('"+bg.dataset.bg+"')";}
+    if(!('IntersectionObserver' in window)){set();return;}
+    new IntersectionObserver(function(es,o){es.forEach(function(e){if(e.isIntersecting){set();o.disconnect();}});},{rootMargin:'900px 0px'}).observe(bg);
+  })();
   var sio=new IntersectionObserver(function(es){es.forEach(function(e){e.target.classList.toggle('in',e.isIntersecting);});},{threshold:.3});
   document.querySelectorAll('.cta-end').forEach(function(el){sio.observe(el);});
   function clamp(x){return Math.min(Math.max(x,0),1);}
@@ -1702,6 +1763,7 @@
   setTimeout(cwaveDelays,1200); setTimeout(cwaveDelays,3000);
 })();
 </script>
+<a id="startpill" href="#contact" aria-label="Start a project — go to contact">Start a project <span class="arr" aria-hidden="true">→</span></a>
 <a id="wa" href="https://wa.me/972549001241?text=Hi%20Alter%20Architects%2C%20I%27d%20like%20to%20talk%20about%20a%20project" target="_blank" rel="noopener" aria-label="WhatsApp Alter Architects"><svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.945C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.738-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.247-.694.247-1.289.173-1.413z"/></svg></a>
 <script>
 (function(){
@@ -1819,14 +1881,94 @@
   if(matchMedia('(pointer:fine)').matches && innerWidth>760){
     var el=document.createElement('div'); el.id='acursor'; document.body.appendChild(el);
     document.documentElement.classList.add('acursor');
-    var tx=innerWidth/2,ty=innerHeight/2,x=tx,y=ty,ts=1,s=1,shown=false;
+    var tx=innerWidth/2,ty=innerHeight/2,x=tx,y=ty,ts=1,s=1,shown=false,running=false,view=false;
+    /* PERF: the rAF loop only runs while the cursor is still settling; it sleeps when idle */
+    function loop(){
+      x+=(tx-x)*0.3; y+=(ty-y)*0.3; s+=(ts-s)*0.22;
+      el.style.transform='translate('+x+'px,'+y+'px) rotate('+(view?0:-22)+'deg) scale('+s+')';
+      if(Math.abs(tx-x)>0.05||Math.abs(ty-y)>0.05||Math.abs(ts-s)>0.002){requestAnimationFrame(loop);}
+      else{x=tx;y=ty;s=ts;running=false;}
+    }
+    function wake(){ if(!running){running=true;requestAnimationFrame(loop);} }
     addEventListener('mousemove',function(e){
       tx=e.clientX; ty=e.clientY; if(!shown){shown=true; el.style.opacity='1';}
-      var t=e.target; ts=(t&&t.closest&&t.closest('a,button,.card,input,textarea,select,[role=button],[onclick]'))?1.35:1;
+      var t=e.target, c=t&&t.closest&&t.closest('#grid .card');
+      /* WOW: over a project card the "A" morphs into a "VIEW →" pill */
+      var v=!!c; if(v!==view){view=v; el.classList.toggle('view',v);}
+      ts=v?1:((t&&t.closest&&t.closest('a,button,input,textarea,select,[role=button],[onclick]'))?1.35:1);
+      wake();
     },{passive:true});
     document.addEventListener('mouseleave',function(){el.style.opacity='0';shown=false;});
-    (function loop(){ x+=(tx-x)*0.3; y+=(ty-y)*0.3; s+=(ts-s)*0.22;
-      el.style.transform='translate('+x+'px,'+y+'px) rotate(-22deg) scale('+s+')'; requestAnimationFrame(loop); })();
+  }
+})();
+</script>
+<script>
+/* ===== WOW effects: card tilt · logo spotlight · hero parallax · start-pill ===== */
+(function(){
+  var FINE=matchMedia('(pointer:fine)').matches && innerWidth>760;
+  function noMotion(){return matchMedia('(prefers-reduced-motion:reduce)').matches || document.documentElement.classList.contains('a11y-nomotion');}
+
+  /* 1b. project cards tilt gently toward the mouse (desktop only) */
+  if(FINE){
+    var grid=document.getElementById('grid');
+    if(grid){
+      grid.addEventListener('mouseenter',function(e){var c=e.target; if(c&&c.classList&&c.classList.contains('card'))c.style.transition='transform .14s ease';},true);
+      grid.addEventListener('mousemove',function(e){
+        if(noMotion())return;
+        var c=e.target.closest&&e.target.closest('.card'); if(!c)return;
+        var r=c.getBoundingClientRect(), px=(e.clientX-r.left)/r.width-0.5, py=(e.clientY-r.top)/r.height-0.5;
+        c.style.transform='perspective(900px) rotateX('+(-py*7).toFixed(2)+'deg) rotateY('+(px*7).toFixed(2)+'deg)';
+      },{passive:true});
+      grid.addEventListener('mouseleave',function(e){var c=e.target; if(c&&c.classList&&c.classList.contains('card')){c.style.transition='transform .55s cubic-bezier(.16,1,.3,1)';c.style.transform='';}},true);
+    }
+  }
+
+  /* 2. spotlight on the client wall — logos within ~150px of the cursor light up in colour */
+  if(FINE){
+    var cw=document.querySelector('.clientwall .cw-grid');
+    if(cw){
+      var logos=[].slice.call(cw.querySelectorAll('.cw-logo')), rects=null, R=150, lit=[], raf=0, mx=0, my=0;
+      function measure(){rects=logos.map(function(l){var r=l.getBoundingClientRect();return {x:r.left+r.width/2,y:r.top+r.height/2};});}
+      function update(){raf=0; if(!rects)measure();
+        var next=[]; for(var i=0;i<logos.length;i++){var dx=rects[i].x-mx,dy=rects[i].y-my; if(dx*dx+dy*dy<R*R)next.push(i);}
+        for(var j=0;j<lit.length;j++){ if(next.indexOf(lit[j])<0) logos[lit[j]].classList.remove('spot'); }
+        for(var k=0;k<next.length;k++){ logos[next[k]].classList.add('spot'); }
+        lit=next;
+      }
+      cw.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;if(!raf)raf=requestAnimationFrame(update);},{passive:true});
+      cw.addEventListener('mouseenter',function(){rects=null;});
+      cw.addEventListener('mouseleave',function(){for(var j=0;j<lit.length;j++)logos[lit[j]].classList.remove('spot');lit=[];});
+      addEventListener('resize',function(){rects=null;});
+      addEventListener('scroll',function(){rects=null;},{passive:true});
+    }
+  }
+
+  /* 3. hero depth parallax — text drifts with the mouse, the slide drifts the other way */
+  if(FINE){
+    var hero=document.getElementById('hero');
+    if(hero){
+      var hw=hero.querySelector('.wrap'), htx=0,hty=0,hx=0,hy=0,hraf=0;
+      function hloop(){
+        hx+=(htx-hx)*0.08; hy+=(hty-hy)*0.08;
+        if(hw)hw.style.transform='translate3d('+(hx*10).toFixed(2)+'px,'+(hy*8).toFixed(2)+'px,0)';
+        var sl=hero.querySelector('.slide.active'); if(sl)sl.style.backgroundPosition='calc(50% + '+(-hx*14).toFixed(2)+'px) calc(50% + '+(-hy*10).toFixed(2)+'px)';
+        if(Math.abs(htx-hx)>0.002||Math.abs(hty-hy)>0.002)hraf=requestAnimationFrame(hloop); else hraf=0;
+      }
+      function hwake(){if(!hraf)hraf=requestAnimationFrame(hloop);}
+      hero.addEventListener('mousemove',function(e){ if(noMotion())return; var r=hero.getBoundingClientRect(); htx=((e.clientX-r.left)/r.width-0.5)*2; hty=((e.clientY-r.top)/r.height-0.5)*2; hwake(); },{passive:true});
+      hero.addEventListener('mouseleave',function(){htx=0;hty=0;hwake();});
+    }
+  }
+
+  /* 4. "Start a project" pill: shows once you've scrolled past the hero, hides near the contact section */
+  var pill=document.getElementById('startpill');
+  if(pill){
+    var nearCta=false, pt=0;
+    function upd(){ var show=window.scrollY>innerHeight*0.85 && !nearCta && document.body.classList.contains('revealed'); pill.classList.toggle('on',show); }
+    try{ var cta=document.querySelector('.cta-end'); if(cta) new IntersectionObserver(function(es){es.forEach(function(e){nearCta=e.isIntersecting;upd();});},{rootMargin:'0px 0px -15% 0px'}).observe(cta); }catch(e){}
+    addEventListener('scroll',function(){ if(!pt){ pt=requestAnimationFrame(function(){pt=0;upd();}); } },{passive:true});
+    addEventListener('alterReveal',function(){setTimeout(upd,300);},{once:true});
+    upd();
   }
 })();
 </script>
