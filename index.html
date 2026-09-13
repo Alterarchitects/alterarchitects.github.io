@@ -356,8 +356,9 @@
   #gate .aenter:hover .gicon{transform:scale(1.06)}
   @keyframes apulse{0%,100%{opacity:.9}50%{opacity:1}}
   #gate .ghint2{color:#6f6f68;letter-spacing:.24em;font-size:10px;text-transform:uppercase;margin-top:-12px}
-  #intro .intromark img.logomark{display:block;margin:0 auto;width:100%;height:auto;opacity:0;transform:scale(1.22);filter:blur(12px)}
-  #intro.playing .intromark img.logomark{animation:slam .95s cubic-bezier(.2,.85,.2,1) .5s forwards}
+  /* welcome logo: still — a plain fade-in, no zoom/blur movement (per request) */
+  #intro .intromark img.logomark{display:block;margin:0 auto;width:100%;height:auto;opacity:0;transform:none;filter:none}
+  #intro.playing .intromark img.logomark{animation:slam .9s ease .5s forwards}
   @media(max-width:760px){
     .studio-pin{height:auto}
     .studio-pin-stage{position:relative;height:auto;min-height:0;display:block;overflow:visible;padding:48px 0 4px}
@@ -861,14 +862,14 @@
   var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
 
   /* ---- licensed soundtrack: "In that Future Bass" ---- */
-  var track=document.getElementById('track'),muted=false,started=false,VOL=.035,fadeIv;
+  var track=document.getElementById('track'),muted=false,started=false,VOL=.02,fadeIv;
   /* mobile (esp. iOS, which ignores JS volume): load a pre-lowered audio file */
   var MOBILE=/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)||innerWidth<=760;
   if(MOBILE){ track.src='assets/soundtrack_mobile.mp3'; VOL=1; }
   function startAudio(){
     try{
       /* MOBILE: iOS ignores track.volume, so route the track through a Web Audio gain node — 0.5 = half volume */
-      if(MOBILE && !window.__mGain){ try{ var AC=window.AudioContext||window.webkitAudioContext; if(AC){ var ctx=new AC(); var src=ctx.createMediaElementSource(track); var g=ctx.createGain(); g.gain.value=0.5; src.connect(g); g.connect(ctx.destination); if(ctx.state==='suspended')ctx.resume(); window.__mGain=g; } }catch(e){} }
+      if(MOBILE && !window.__mGain){ try{ var AC=window.AudioContext||window.webkitAudioContext; if(AC){ var ctx=new AC(); var src=ctx.createMediaElementSource(track); var g=ctx.createGain(); g.gain.value=0.3; src.connect(g); g.connect(ctx.destination); if(ctx.state==='suspended')ctx.resume(); window.__mGain=g; } }catch(e){} }
       track.volume=0; track.currentTime=0;
       var p=track.play();
       if(p&&p.catch)p.catch(function(){});
