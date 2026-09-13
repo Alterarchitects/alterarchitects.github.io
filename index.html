@@ -861,12 +861,14 @@
   var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
 
   /* ---- licensed soundtrack: "In that Future Bass" ---- */
-  var track=document.getElementById('track'),muted=false,started=false,VOL=.07,fadeIv;
+  var track=document.getElementById('track'),muted=false,started=false,VOL=.035,fadeIv;
   /* mobile (esp. iOS, which ignores JS volume): load a pre-lowered audio file */
   var MOBILE=/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)||innerWidth<=760;
   if(MOBILE){ track.src='assets/soundtrack_mobile.mp3'; VOL=1; }
   function startAudio(){
     try{
+      /* MOBILE: iOS ignores track.volume, so route the track through a Web Audio gain node — 0.5 = half volume */
+      if(MOBILE && !window.__mGain){ try{ var AC=window.AudioContext||window.webkitAudioContext; if(AC){ var ctx=new AC(); var src=ctx.createMediaElementSource(track); var g=ctx.createGain(); g.gain.value=0.5; src.connect(g); g.connect(ctx.destination); if(ctx.state==='suspended')ctx.resume(); window.__mGain=g; } }catch(e){} }
       track.volume=0; track.currentTime=0;
       var p=track.play();
       if(p&&p.catch)p.catch(function(){});
@@ -1903,7 +1905,7 @@
 })();
 </script>
 <script>
-/* ===== WOW effects: card tilt · logo spotlight · hero parallax · start-pill ===== */
+/* ===== WOW effects: card tilt · logo spotlight · start-pill ===== */
 (function(){
   var FINE=matchMedia('(pointer:fine)').matches && innerWidth>760;
   function noMotion(){return matchMedia('(prefers-reduced-motion:reduce)').matches || document.documentElement.classList.contains('a11y-nomotion');}
@@ -1943,22 +1945,7 @@
     }
   }
 
-  /* 3. hero depth parallax — text drifts with the mouse, the slide drifts the other way */
-  if(FINE){
-    var hero=document.getElementById('hero');
-    if(hero){
-      var hw=hero.querySelector('.wrap'), htx=0,hty=0,hx=0,hy=0,hraf=0;
-      function hloop(){
-        hx+=(htx-hx)*0.08; hy+=(hty-hy)*0.08;
-        if(hw)hw.style.transform='translate3d('+(hx*10).toFixed(2)+'px,'+(hy*8).toFixed(2)+'px,0)';
-        var sl=hero.querySelector('.slide.active'); if(sl)sl.style.backgroundPosition='calc(50% + '+(-hx*14).toFixed(2)+'px) calc(50% + '+(-hy*10).toFixed(2)+'px)';
-        if(Math.abs(htx-hx)>0.002||Math.abs(hty-hy)>0.002)hraf=requestAnimationFrame(hloop); else hraf=0;
-      }
-      function hwake(){if(!hraf)hraf=requestAnimationFrame(hloop);}
-      hero.addEventListener('mousemove',function(e){ if(noMotion())return; var r=hero.getBoundingClientRect(); htx=((e.clientX-r.left)/r.width-0.5)*2; hty=((e.clientY-r.top)/r.height-0.5)*2; hwake(); },{passive:true});
-      hero.addEventListener('mouseleave',function(){htx=0;hty=0;hwake();});
-    }
-  }
+  /* (hero parallax removed per request — the wordmark stays still) */
 
   /* 4. "Start a project" pill: shows once you've scrolled past the hero, hides near the contact section */
   var pill=document.getElementById('startpill');
