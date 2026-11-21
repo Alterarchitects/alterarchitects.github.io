@@ -13,8 +13,10 @@
 <link rel="icon" href="assets/favicon.png">
 <link rel="apple-touch-icon" href="assets/favicon.png">
 <link rel="manifest" href="manifest.json">
-<link rel="preload" as="image" href="assets/intro.webp" fetchpriority="high">
-<link rel="preload" as="image" href="assets/hero/hero_1.webp" fetchpriority="low">
+<link rel="preload" as="image" href="assets/intro.webp" fetchpriority="high" media="(min-width:761px), (orientation:landscape)">
+<link rel="preload" as="image" href="assets/intro_m.webp" fetchpriority="high" media="(max-width:760px) and (orientation:portrait)">
+<link rel="preload" as="image" href="assets/hero/hero_1.webp" fetchpriority="low" media="(min-width:761px), (orientation:landscape)">
+<link rel="preload" as="image" href="assets/hero/m/hero_1.webp" fetchpriority="low" media="(max-width:760px) and (orientation:portrait)">
 <!-- Google tag (gtag.js) — placed after the critical image preloads so the LCP image is discovered first -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PXGGG4F9SC"></script>
 <script>
@@ -104,7 +106,7 @@
   nav .links a:hover{opacity:1}
 
   /* ---------- MOBILE MENU ---------- */
-  #menuBtn{display:none;background:transparent;border:0;cursor:pointer;padding:10px;margin:-10px;z-index:210;color:inherit}
+  #menuBtn{display:none;background:transparent;border:0;cursor:pointer;padding:17px 10px;margin:-17px -10px;z-index:210;color:inherit}
   #menuBtn .mb{display:block;width:26px;height:2px;background:currentColor;transition:transform .3s ease,opacity .3s ease}
   #menuBtn .mb+.mb{margin-top:7px}
   body.menuopen #menuBtn .mb:first-child{transform:translateY(4.5px) rotate(45deg)}
@@ -470,7 +472,7 @@
   .cform input,.cform textarea{background:transparent;border:0;border-bottom:1px solid #333;color:#fff;padding:13px 2px;font-size:15px;font-family:inherit;width:100%}
   .cform textarea{resize:vertical;min-height:60px}
   .cform input:focus,.cform textarea:focus{outline:none;border-color:var(--lime)}
-  .cform input::placeholder,.cform textarea::placeholder{color:#777;letter-spacing:.04em}
+  .cform input::placeholder,.cform textarea::placeholder{color:#a3a39c;letter-spacing:.04em}
   .cform button{grid-column:1/-1;justify-self:start;background:var(--lime);color:#0b0b0b;border:0;padding:17px 40px;
     font-weight:700;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;font-size:13px}
   .cform button:hover{background:#fff}
@@ -554,7 +556,8 @@
     .wrap{padding:0 22px}
     nav{padding:16px 22px}.nav .links{display:none}nav .links{display:none}
     #menuBtn{display:block}
-    .studio,.modular,.cta .info,.work .grid,.steps,.logos{grid-template-columns:1fr}
+    .studio,.modular,.cta .info,.logos{grid-template-columns:1fr}
+    .steps{grid-template-columns:repeat(2,1fr)}
     .grid{grid-template-columns:1fr 1fr}
     .modular .txt{padding:60px 0}
     .stats{flex-wrap:wrap;gap:28px}
@@ -818,6 +821,71 @@
     .cw-pin,.studio-pin-stage,.hl-stage,#process>.wrap{position:static!important;height:auto!important}
     .sectitle,h1,h2,h3{color:#000!important}
   }
+
+  /* ================= 2026-11 QA PASS ================= */
+  #intro .ibg{background-image:url('assets/intro.webp')}
+  @media(max-width:760px) and (orientation:portrait){#intro .ibg{background-image:url('assets/intro_m.webp')}}
+  nav a.brand{color:inherit;cursor:pointer}
+  /* hero: the live project caption sits under the wordmark line, clear of it and of the floating buttons */
+  @media(min-width:641px){.hero .nowshow{bottom:22px}}
+  /* tablet: two-column project grid (it was collapsing to one giant column) */
+  @media(max-width:900px){.work .grid{grid-template-columns:1fr 1fr}}
+  @media(max-width:640px){.work .grid{grid-template-columns:1fr}}
+  /* manifesto: shorter pinned scroll on desktop */
+  @media(min-width:761px){#manifesto{height:480vh}}
+  /* --- pinned sections: keep content clear of the floating buttons (right) and the Start-a-project pill (bottom-left) --- */
+  @media(min-width:761px){
+    .studio-pin-stage{padding-bottom:88px}
+    .clientwall .cw-pin{padding:clamp(40px,6vh,76px) clamp(78px,6.7vw,96px) 90px!important}
+    .clientwall .cw-logo{flex:0 0 clamp(84px,min(8.6vw,12.4vh),122px)!important}
+    #process>.wrap{padding-bottom:max(88px,6vh)!important}
+  }
+  @media(min-width:761px) and (max-width:1740px){#process>.wrap{padding-right:96px}}
+  @media(min-width:901px) and (max-height:720px){
+    #process>.wrap{padding-top:24px!important}
+    #process .sectitle{font-size:clamp(34px,4.4vw,58px)}
+    #process .lead{margin-top:14px;font-size:17px}
+    #process .steps{margin-top:22px}
+    #process .step{min-height:118px;padding:18px 22px 20px}
+    #process .step p{margin-top:8px}
+  }
+  @media(min-width:761px) and (max-width:900px){#process .step{min-height:150px}}
+  /* don't pin the process grid where it cannot fit on one screen */
+  @media(min-width:761px) and (max-width:900px) and (max-height:940px),(min-width:901px) and (max-height:560px){
+    #process{height:auto}
+    #process>.wrap{position:static;min-height:0}
+  }
+  /* --- phones: the studio block scrolls normally (it was pinned for 3.6 screens with the numbers clipped off-screen) --- */
+  @media(max-width:760px){
+    .studio-pin{height:auto!important}
+    .studio-pin-stage{position:relative!important;top:auto!important;height:auto!important;display:block!important;overflow:visible!important;padding:28px 0 0!important}
+    .studio-pin-stage .studio-imgs{padding:0 22px!important}
+    .studio-stats-wrap{padding:28px 22px 0!important}
+    .clientwall .cw-pin{padding-bottom:80px!important}
+    /* form: 16px fields (no iOS zoom-on-focus) and comfortable touch targets */
+    .cform input,.cform textarea{font-size:16px!important;padding:11px 2px!important;min-height:44px}
+    .cform button{padding:14px 28px!important}
+    .cta-info>div a{padding:7px 0}
+  }
+  /* --- phones: floating buttons in one bottom row, off the wordmark --- */
+  @media(max-width:640px){
+    #a11y-fab{right:14px!important;bottom:16px!important}
+    .hero{min-height:520px}
+    .hero .wrap{padding-bottom:78px}
+    #wa{right:70px;bottom:15px}
+    #snd{right:16px;top:62px;bottom:auto}
+    #a11y-panel{right:12px;bottom:74px}
+    footer{padding-bottom:90px}
+    .hero .edge{font-size:10px}
+    .founder .fcap .rl{font-size:11px}
+    .stat .t{font-size:10px}
+    .stats .stat{flex:1 1 0;min-width:0}
+    .cta-end .end-mark{font-size:11px!important}
+  }
+  @media(max-width:380px){.hero .kicker{letter-spacing:.1em}}
+  footer a{display:inline-block;padding:6px 0}
+  .cform .err{grid-column:1/-1;color:#ff9c8f;font-size:14px;letter-spacing:.02em}
+  .cform .err a{text-decoration:underline}
 </style>
 <noscript><style>
   /* Without JS the cinematic intro can't be dismissed — show the real site instead */
@@ -834,12 +902,12 @@
 <div id="progress"></div>
 
 <div id="intro">
-  <div class="ibg" style="background-image:url('assets/intro.webp')"></div>
+  <div class="ibg"></div>
   <div class="ivign"></div>
 
   <div id="gate">
     <button class="aenter" id="enterBtn" aria-label="Press to enter">
-      <img class="gicon" src="assets/icon_a.png" alt="Alter Architects">
+      <img class="gicon" src="assets/icon_a.png" alt="Alter Architects" width="854" height="570">
     </button>
     <div class="ghint">Press to enter</div>
     <div class="ghint2">Sound on</div>
@@ -847,13 +915,13 @@
 
   <div class="icore">
     <div class="welcome">Welcome to</div>
-    <div class="intromark"><img class="logomark" src="assets/logo_welcome.png" alt="Alter Architects"></div>
+    <div class="intromark"><img class="logomark" src="assets/logo_welcome.png" alt="Alter Architects" width="1190" height="580"></div>
     <div class="accent"></div>
     <div class="sub">Where vision becomes <b>workspace.</b></div>
   </div>
 </div>
 <div id="journey"></div>
-<audio id="track" src="assets/soundtrack.mp3" loop preload="none"></audio>
+<audio id="track" src="assets/soundtrack_128.mp3" loop preload="none"></audio>
 <button id="snd" title="Toggle sound" aria-label="Toggle sound">♪</button>
 <script>
 (function(){
@@ -916,6 +984,7 @@
     var jr=document.getElementById('journey');
     if(jr){ jr.classList.add('fade'); setTimeout(function(){jr.style.display='none';},650); }
     if(started) fadeOutStop();   /* let the track ride the reveal, then fade over ~10s */
+    try{ if(location.hash.length>1){ var ht=document.getElementById(decodeURIComponent(location.hash.slice(1))); if(ht&&ht.id!=='hero') setTimeout(function(){ht.scrollIntoView();},80); } }catch(e){}
   }
 
   /* image pool for the montage — preloaded so frames never flash empty.
@@ -980,7 +1049,7 @@
 
 
 <nav>
-  <div class="brand" onclick="window.scrollTo({top:0,behavior:'smooth'})" style="cursor:pointer">ALTER</div>
+  <a class="brand" href="#hero" aria-label="Alter Architects — back to top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false">ALTER</a>
   <div class="links">
     <a href="#work">Work</a>
     <a href="#studio">Studio</a>
@@ -1052,7 +1121,7 @@
   <div class="wrap">
     <div class="kicker">Architecture · Interior Design · Workplace</div>
     <div class="accentline"></div>
-    <h1><span class="line"><span class="ln">ALTER</span></span><span class="line"><span class="ln thin">ARCHITECTS</span></span></h1>
+    <h1><span class="line"><span class="ln">ALTER</span></span> <span class="line"><span class="ln thin">ARCHITECTS</span></span></h1>
     <p class="tagline"><b>Refined.</b> <b>Innovative.</b> <b>Tailor Made.</b></p>
   </div>
   <div class="nowshow">
@@ -1075,6 +1144,7 @@
     {img:'assets/hero/hero_5.webp',name:'GLD Re',meta:'3,500 sqm · Bnei Brak'},
     {img:'assets/hero/hero_6.webp',name:'Tata',meta:'1,500 sqm · Petah Tikva'}
   ];
+  if(innerWidth<=760 && innerHeight>innerWidth) slides.forEach(function(s){s.img=s.img.replace('assets/hero/','assets/hero/m/');});
   var hero=document.getElementById('hero'),bars=document.getElementById('hBars');
   var els=[], barEls=[];
   slides.forEach(function(s,i){
@@ -1131,16 +1201,16 @@
     <svg class="studio-alter" viewBox="0 0 1000 250" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><text x="500" y="206" text-anchor="middle" textLength="1000" lengthAdjust="spacingAndGlyphs" font-family="Helvetica Neue,Arial,sans-serif" font-weight="900" font-size="250" letter-spacing="-6" fill="#C8F23C">ALTER</text></svg>
   <div class="studio-imgs">
     <div class="team">
-      <img class="ta" src="assets/team.webp" alt="The Alter Architects team" loading="lazy" decoding="async">
+      <img class="ta" src="assets/team.webp" srcset="assets/team_900.webp 900w, assets/team.webp 1700w" sizes="(max-width:760px) 100vw, 60vw" alt="The Alter Architects team" width="1700" height="1133" loading="lazy" decoding="async">
     </div>
-    <div class="founder"><img class="fphoto" src="assets/itay.webp" alt="Itay Alter" loading="lazy" decoding="async"><div class="sheen"></div>
+    <div class="founder"><img class="fphoto" src="assets/itay.webp" alt="Itay Alter" width="900" height="1350" loading="lazy" decoding="async"><div class="sheen"></div>
       <div class="fcap"><div class="nm">Itay Alter</div><div class="rl">Owner · Head Architect &amp; Designer</div></div>
     </div>
   </div>
   <div class="studio-stats-wrap"><div class="stats">
-    <div class="stat"><div class="n"><span class="cnt" data-from="2026" data-to="2008" data-dur="1700">2026</span><span class="dot">.</span></div><div class="t">Operating since</div></div>
-    <div class="stat"><div class="n"><span class="cnt" data-to="500" data-suf="+">0</span><span class="dot">.</span></div><div class="t">Projects delivered</div></div>
-    <div class="stat"><div class="n"><span class="cnt" data-to="250" data-suf="K">0</span><span class="dot">.</span></div><div class="t">m² delivered</div></div>
+    <div class="stat"><div class="n"><span class="cnt" data-from="2026" data-to="2008" data-dur="1700">2008</span><span class="dot">.</span></div><div class="t">Operating since</div></div>
+    <div class="stat"><div class="n"><span class="cnt" data-to="500" data-suf="+">500+</span><span class="dot">.</span></div><div class="t">Projects delivered</div></div>
+    <div class="stat"><div class="n"><span class="cnt" data-to="250" data-suf="K">250K</span><span class="dot">.</span></div><div class="t">m² delivered</div></div>
   </div></div></div></div>
 </section>
 
@@ -1155,67 +1225,67 @@
       <p class="lead">A selection of the companies we've designed workspaces for.</p>
     </div>
     <div class="cw-grid">
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_00.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_00.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_01.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_01.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_02.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_02.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_03.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_03.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_04.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_04.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_05.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_05.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_06.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_06.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_07.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_07.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_08.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_08.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_09.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_09.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_10.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_10.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_11.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_11.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_12.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_12.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_13.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_13.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_14.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_14.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_15.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_15.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_16.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_16.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_17.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_17.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_18.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_18.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_19.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_19.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_20.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_20.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_21.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_21.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_22.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_22.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_23.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_23.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_24.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_24.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_25.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_25.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_26.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_26.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_27.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_27.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_28.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_28.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_29.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_29.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_30.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_30.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_31.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_31.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_32.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_32.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_33.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_33.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_34.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_34.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_35.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_35.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_36.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_36.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_37.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_37.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_38.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_38.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_39.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_39.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_41.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_41.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_42.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_42.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_43.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_43.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_44.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_44.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_45.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_45.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_46.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_46.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_47.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_47.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_48.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_48.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_49.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_49.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_50.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_50.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_51.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_51.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_52.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_52.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_53.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_53.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_54.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_54.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_55.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_55.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_56.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_56.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_57.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_57.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_58.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_58.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_59.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_59.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_60.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_60.png)"></i></span>
-      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_61.webp" alt="" loading="lazy"><i class="cl-lime" style="--m:url(assets/logos/sil_61.png)"></i></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_00.webp" alt="Citibank" width="280" height="78" loading="lazy" decoding="async"></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_01.webp" alt="Sheba Medical Center" width="258" height="130" loading="lazy" decoding="async"></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_02.webp" alt="הפול" lang="he" width="280" height="107" loading="lazy" decoding="async"></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_03.webp" alt="NTA" width="233" height="130" loading="lazy" decoding="async"></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_04.webp" alt="Jefferies" width="280" height="61" loading="lazy" decoding="async"></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_05.webp" alt="EON" width="130" height="130" loading="lazy" decoding="async"></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_06.webp" alt="CYE" width="280" height="122" loading="lazy" decoding="async"></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_07.webp" alt="QuickLizard" width="280" height="59" loading="lazy" decoding="async"></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_08.webp" alt="Tata Consultancy Services" width="280" height="81" loading="lazy" decoding="async"></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_09.webp" alt="Israel Ministry of Defense" width="134" height="130" loading="lazy" decoding="async"></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_10.webp" alt="Accord Insurance Group" width="280" height="92" loading="lazy" decoding="async"></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_11.webp" alt="Fido" width="280" height="120" loading="lazy" decoding="async"></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_12.webp" alt="Baram" width="189" height="130" loading="lazy" decoding="async"></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_13.webp" alt="eko" width="275" height="130" loading="lazy" decoding="async"></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_14.webp" alt="Mivne" width="212" height="130" loading="lazy" decoding="async"></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_15.webp" alt="Israel Aerospace Industries" width="280" height="85" loading="lazy" decoding="async"></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_16.webp" alt="Elbit Systems" width="280" height="100" loading="lazy" decoding="async"></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_17.webp" alt="Fortissimo Capital" width="106" height="130" loading="lazy" decoding="async"></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_18.webp" alt="Appdome" width="280" height="56" loading="lazy" decoding="async"></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_19.webp" alt="RAD Bynet Real Estate" width="280" height="50" loading="lazy" decoding="async"></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_20.webp" alt="שבירו ייזום ובנייה" lang="he" width="280" height="100" loading="lazy" decoding="async"></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_21.webp" alt="Amazon" width="280" height="90" loading="lazy" decoding="async"></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_22.webp" alt="Enercon Technologies" width="280" height="98" loading="lazy" decoding="async"></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_23.webp" alt="Equity" width="130" height="130" loading="lazy" decoding="async"></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_24.webp" alt="Yitzhak Tshuva Group" width="280" height="129" loading="lazy" decoding="async"></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_25.webp" alt="Polytex" width="280" height="89" loading="lazy" decoding="async"></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_26.webp" alt="Kenshoo" width="231" height="130" loading="lazy" decoding="async"></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_27.webp" alt="Ashtrom Properties" width="233" height="130" loading="lazy" decoding="async"></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_28.webp" alt="United Arab Emirates" width="101" height="130" loading="lazy" decoding="async"></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_29.webp" alt="Sela" width="270" height="130" loading="lazy" decoding="async"></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_30.webp" alt="סייפר" lang="he" width="280" height="125" loading="lazy" decoding="async"></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_31.webp" alt="Pilat" width="252" height="130" loading="lazy" decoding="async"></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_32.webp" alt="כהן פליס נדל&quot;ן" lang="he" width="280" height="128" loading="lazy" decoding="async"></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_33.webp" alt="Software Sources" width="84" height="130" loading="lazy" decoding="async"></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_34.webp" alt="Azrieli Group" width="106" height="130" loading="lazy" decoding="async"></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_35.webp" alt="SoftBank Group" width="280" height="76" loading="lazy" decoding="async"></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_36.webp" alt="BLER" width="280" height="127" loading="lazy" decoding="async"></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_37.webp" alt="Shlomo Insurance" width="247" height="130" loading="lazy" decoding="async"></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_38.webp" alt="Telrad" width="280" height="110" loading="lazy" decoding="async"></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_39.webp" alt="Park Atidim Tel Aviv" width="280" height="67" loading="lazy" decoding="async"></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_41.webp" alt="Shaham Orlan" width="166" height="130" loading="lazy" decoding="async"></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_42.webp" alt="Coti" width="280" height="97" loading="lazy" decoding="async"></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_43.webp" alt="REIT 1" width="229" height="130" loading="lazy" decoding="async"></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_44.webp" alt="Magalcom" width="280" height="70" loading="lazy" decoding="async"></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_45.webp" alt="Sela Binui" width="280" height="72" loading="lazy" decoding="async"></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_46.webp" alt="Addionics" width="280" height="40" loading="lazy" decoding="async"></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_47.webp" alt="רייסדור" lang="he" width="280" height="96" loading="lazy" decoding="async"></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_48.webp" alt="Migdal Group" width="166" height="130" loading="lazy" decoding="async"></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_49.webp" alt="Solcon" width="280" height="106" loading="lazy" decoding="async"></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_50.webp" alt="Mgroup" width="218" height="130" loading="lazy" decoding="async"></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_51.webp" alt="Gadot Biochemical Industries" width="280" height="105" loading="lazy" decoding="async"></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_52.webp" alt="Oasis" width="276" height="130" loading="lazy" decoding="async"></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_53.webp" alt="Cellopark" width="280" height="57" loading="lazy" decoding="async"></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_54.webp" alt="IGIN" width="130" height="130" loading="lazy" decoding="async"></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_55.webp" alt="PointFive" width="280" height="46" loading="lazy" decoding="async"></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_56.webp" alt="The Phoenix" width="280" height="129" loading="lazy" decoding="async"></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_57.webp" alt="Boston Consulting Group" width="280" height="64" loading="lazy" decoding="async"></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_58.webp" alt="Panaya" width="280" height="67" loading="lazy" decoding="async"></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_59.webp" alt="" width="214" height="130" loading="lazy" decoding="async"></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_60.webp" alt="Minrav Group" width="280" height="117" loading="lazy" decoding="async"></span>
+      <span class="cw-logo"><img class="cl-real" src="assets/logos/logo_61.webp" alt="Navan" width="280" height="72" loading="lazy" decoding="async"></span>
     </div>
   </div>
 </section>
@@ -1262,147 +1332,147 @@
   <p class="lead">A selection of recent workplaces — each one built around the people who use it. Click any project to step inside.</p>
   <div class="grid" id="grid">
     <a class="card" onclick="openProject('qualitest')">
-      <img src="assets/projects/07_QualiTest/web_01.webp" loading="lazy" decoding="async" alt="QualiTest">
+      <img src="assets/projects/07_QualiTest/web_01.webp" srcset="assets/projects/07_QualiTest/web_01_720.webp 720w, assets/projects/07_QualiTest/web_01.webp 1200w" sizes="(max-width:640px) 100vw, (max-width:900px) 50vw, 34vw" width="1200" height="800" loading="lazy" decoding="async" alt="QualiTest">
       <div class="num">01</div>
       <div class="meta"><h3>QualiTest</h3><div class="sub"><span><b>2,000</b> sqm</span><span>Petah Tikva</span></div></div>
     </a>
     <a class="card" onclick="openProject('shlomoinsurance')">
-      <img src="assets/projects/shlomoinsurance/web_01.webp" loading="lazy" decoding="async" alt="Shlomo Insurance">
+      <img src="assets/projects/shlomoinsurance/web_01.webp" srcset="assets/projects/shlomoinsurance/web_01_720.webp 720w, assets/projects/shlomoinsurance/web_01.webp 1200w" sizes="(max-width:640px) 100vw, (max-width:900px) 50vw, 34vw" width="1200" height="675" loading="lazy" decoding="async" alt="Shlomo Insurance">
       <div class="num">02</div>
       <div class="meta"><h3>Shlomo Insurance</h3><div class="sub"><span><b>10,000</b> sqm</span><span>Petah Tikva</span></div></div>
     </a>
     <a class="card" onclick="openProject('software')">
-      <img src="assets/projects/10_Software_Sources/web_01.webp" loading="lazy" decoding="async" alt="Software Sources">
+      <img src="assets/projects/10_Software_Sources/web_01.webp" srcset="assets/projects/10_Software_Sources/web_01_720.webp 720w, assets/projects/10_Software_Sources/web_01.webp 1200w" sizes="(max-width:640px) 100vw, (max-width:900px) 50vw, 34vw" width="1200" height="800" loading="lazy" decoding="async" alt="Software Sources">
       <div class="num">03</div>
       <div class="meta"><h3>Software Sources</h3><div class="sub"><span><b>1,000</b> sqm</span><span>Raanana</span></div></div>
     </a>
     <a class="card" onclick="openProject('ipc')">
-      <img src="assets/projects/08_IPC/web_01.webp" loading="lazy" decoding="async" alt="IPC">
+      <img src="assets/projects/08_IPC/web_01.webp" srcset="assets/projects/08_IPC/web_01_720.webp 720w, assets/projects/08_IPC/web_01.webp 1200w" sizes="(max-width:640px) 100vw, (max-width:900px) 50vw, 34vw" width="1200" height="800" loading="lazy" decoding="async" alt="IPC">
       <div class="num">04</div>
       <div class="meta"><h3>IPC</h3><div class="sub"><span><b>2,000</b> sqm</span><span>Jerusalem</span></div></div>
     </a>
     <a class="card" onclick="openProject('telrad')">
-      <img src="assets/projects/02_Telrad/web_01.webp" loading="lazy" decoding="async" alt="Telrad">
+      <img src="assets/projects/02_Telrad/web_01.webp" srcset="assets/projects/02_Telrad/web_01_720.webp 720w, assets/projects/02_Telrad/web_01.webp 1200w" sizes="(max-width:640px) 100vw, (max-width:900px) 50vw, 34vw" width="1200" height="799" loading="lazy" decoding="async" alt="Telrad">
       <div class="num">05</div>
       <div class="meta"><h3>Telrad</h3><div class="sub"><span><b>3,000</b> sqm</span><span>Shoham</span></div></div>
     </a>
     <a class="card" onclick="openProject('oasis')">
-      <img src="assets/projects/03_Oasis/web_01.webp" loading="lazy" decoding="async" alt="Oasis">
+      <img src="assets/projects/03_Oasis/web_01.webp" srcset="assets/projects/03_Oasis/web_01_720.webp 720w, assets/projects/03_Oasis/web_01.webp 1200w" sizes="(max-width:640px) 100vw, (max-width:900px) 50vw, 34vw" width="1200" height="799" loading="lazy" decoding="async" alt="Oasis">
       <div class="num">06</div>
       <div class="meta"><h3>Oasis</h3><div class="sub"><span><b>2,000</b> sqm</span><span>Shoham</span></div></div>
     </a>
     <a class="card extra" onclick="openProject('bahrain')">
-      <img src="assets/projects/04_Bahrain_Embassy/web_01.webp" loading="lazy" decoding="async" alt="Bahrain Embassy">
+      <img src="assets/projects/04_Bahrain_Embassy/web_01.webp" srcset="assets/projects/04_Bahrain_Embassy/web_01_720.webp 720w, assets/projects/04_Bahrain_Embassy/web_01.webp 800w" sizes="(max-width:640px) 100vw, (max-width:900px) 50vw, 34vw" width="800" height="1200" loading="lazy" decoding="async" alt="Bahrain Embassy">
       <div class="num">07</div>
       <div class="meta"><h3>Bahrain Embassy</h3><div class="sub"><span><b>1,500</b> sqm</span><span>Herzliya</span></div></div>
     </a>
     <a class="card extra" onclick="openProject('tata')">
-      <img src="assets/projects/01_Tata/web_01.webp" loading="lazy" decoding="async" alt="Tata">
+      <img src="assets/projects/01_Tata/web_01.webp" srcset="assets/projects/01_Tata/web_01_720.webp 720w, assets/projects/01_Tata/web_01.webp 1200w" sizes="(max-width:640px) 100vw, (max-width:900px) 50vw, 34vw" width="1200" height="799" loading="lazy" decoding="async" alt="Tata">
       <div class="num">08</div>
       <div class="meta"><h3>Tata</h3><div class="sub"><span><b>1,500</b> sqm</span><span>Petah Tikva</span></div></div>
     </a>
     <a class="card extra" onclick="openProject('sela')">
-      <img src="assets/projects/06_Sela/web_01.webp" loading="lazy" decoding="async" alt="Sela">
+      <img src="assets/projects/06_Sela/web_01.webp" srcset="assets/projects/06_Sela/web_01_720.webp 720w, assets/projects/06_Sela/web_01.webp 1200w" sizes="(max-width:640px) 100vw, (max-width:900px) 50vw, 34vw" width="1200" height="832" loading="lazy" decoding="async" alt="Sela">
       <div class="num">09</div>
       <div class="meta"><h3>Sela</h3><div class="sub"><span><b>1,700</b> sqm</span><span>Bnei Brak</span></div></div>
     </a>
     <a class="card extra" onclick="openProject('forttissimo')">
-      <img src="assets/projects/05_Forttissimo/web_01.webp" loading="lazy" decoding="async" alt="Forttissimo">
+      <img src="assets/projects/05_Forttissimo/web_01.webp" srcset="assets/projects/05_Forttissimo/web_01_720.webp 720w, assets/projects/05_Forttissimo/web_01.webp 1200w" sizes="(max-width:640px) 100vw, (max-width:900px) 50vw, 34vw" width="1200" height="799" loading="lazy" decoding="async" alt="Forttissimo">
       <div class="num">10</div>
       <div class="meta"><h3>Forttissimo</h3><div class="sub"><span><b>1,200</b> sqm</span><span>Tel Aviv</span></div></div>
     </a>
     <a class="card extra" onclick="openProject('pilat')">
-      <img src="assets/projects/pilat/web_01.webp" loading="lazy" decoding="async" alt="Pilat">
+      <img src="assets/projects/pilat/web_01.webp" srcset="assets/projects/pilat/web_01_720.webp 720w, assets/projects/pilat/web_01.webp 1200w" sizes="(max-width:640px) 100vw, (max-width:900px) 50vw, 34vw" width="1200" height="799" loading="lazy" decoding="async" alt="Pilat">
       <div class="num">11</div>
       <div class="meta"><h3>Pilat</h3><div class="sub"><span><b>1,200</b> sqm</span><span>Petah Tikva</span></div></div>
     </a>
     <a class="card extra" onclick="openProject('rimonim')">
-      <img src="assets/projects/rimonim/web_01.webp" loading="lazy" decoding="async" alt="Rimonim">
+      <img src="assets/projects/rimonim/web_01.webp" srcset="assets/projects/rimonim/web_01_720.webp 720w, assets/projects/rimonim/web_01.webp 1200w" sizes="(max-width:640px) 100vw, (max-width:900px) 50vw, 34vw" width="1200" height="800" loading="lazy" decoding="async" alt="Rimonim">
       <div class="num">12</div>
       <div class="meta"><h3>Rimonim</h3><div class="sub"><span><b>1,000</b> sqm</span><span>Petah Tikva</span></div></div>
     </a>
     <a class="card extra" onclick="openProject('gld')">
-      <img src="assets/projects/11_GLD_Re/web_01.webp" loading="lazy" decoding="async" alt="GLD Re">
+      <img src="assets/projects/11_GLD_Re/web_01.webp" srcset="assets/projects/11_GLD_Re/web_01_720.webp 720w, assets/projects/11_GLD_Re/web_01.webp 1200w" sizes="(max-width:640px) 100vw, (max-width:900px) 50vw, 34vw" width="1200" height="800" loading="lazy" decoding="async" alt="GLD Re">
       <div class="num">13</div>
       <div class="meta"><h3>GLD Re</h3><div class="sub"><span><b>3,500</b> sqm</span><span>Bnei Brak</span></div></div>
     </a>
     <a class="card extra" onclick="openProject('baram')">
-      <img src="assets/projects/baram/web_01.webp" loading="lazy" decoding="async" alt="Baram">
+      <img src="assets/projects/baram/web_01.webp" srcset="assets/projects/baram/web_01_720.webp 720w, assets/projects/baram/web_01.webp 1200w" sizes="(max-width:640px) 100vw, (max-width:900px) 50vw, 34vw" width="1200" height="800" loading="lazy" decoding="async" alt="Baram">
       <div class="num">14</div>
       <div class="meta"><h3>Baram</h3><div class="sub"><span><b>800</b> sqm</span><span>Kiryat Savyonim</span></div></div>
     </a>
     <a class="card extra" onclick="openProject('uea')">
-      <img src="assets/projects/uea/web_01.webp" loading="lazy" decoding="async" alt="UEA">
+      <img src="assets/projects/uea/web_01.webp" srcset="assets/projects/uea/web_01_720.webp 720w, assets/projects/uea/web_01.webp 1200w" sizes="(max-width:640px) 100vw, (max-width:900px) 50vw, 34vw" width="1200" height="799" loading="lazy" decoding="async" alt="UEA">
       <div class="num">15</div>
       <div class="meta"><h3>UEA</h3><div class="sub"><span><b>2,500</b> sqm</span><span>Herzliya</span></div></div>
     </a>
     <a class="card extra" onclick="openProject('cellopark')">
-      <img src="assets/projects/cellopark/web_01.webp" loading="lazy" decoding="async" alt="Cellopark">
+      <img src="assets/projects/cellopark/web_01.webp" srcset="assets/projects/cellopark/web_01_720.webp 720w, assets/projects/cellopark/web_01.webp 1200w" sizes="(max-width:640px) 100vw, (max-width:900px) 50vw, 34vw" width="1200" height="799" loading="lazy" decoding="async" alt="Cellopark">
       <div class="num">16</div>
       <div class="meta"><h3>Cellopark</h3><div class="sub"><span><b>1,000</b> sqm</span><span>Holon</span></div></div>
     </a>
     <a class="card extra" onclick="openProject('customeriai')">
-      <img src="assets/projects/customeriai/web_01.webp" loading="lazy" decoding="async" alt="Customer Center | IAI">
+      <img src="assets/projects/customeriai/web_01.webp" srcset="assets/projects/customeriai/web_01_720.webp 720w, assets/projects/customeriai/web_01.webp 1200w" sizes="(max-width:640px) 100vw, (max-width:900px) 50vw, 34vw" width="1200" height="675" loading="lazy" decoding="async" alt="Customer Center | IAI">
       <div class="num">17</div>
       <div class="meta"><h3>Customer Center | IAI</h3><div class="sub"><span><b>4,500</b> sqm</span><span>Lod</span></div></div>
     </a>
     <a class="card extra" onclick="openProject('campusinfinity')">
-      <img src="assets/projects/campusinfinity/web_01.webp" loading="lazy" decoding="async" alt="Campus Infinity">
+      <img src="assets/projects/campusinfinity/web_01.webp" srcset="assets/projects/campusinfinity/web_01_720.webp 720w, assets/projects/campusinfinity/web_01.webp 1200w" sizes="(max-width:640px) 100vw, (max-width:900px) 50vw, 34vw" width="1200" height="1000" loading="lazy" decoding="async" alt="Campus Infinity">
       <div class="num">18</div>
       <div class="meta"><h3>Campus Infinity</h3><div class="sub"><span><b>7,000</b> sqm</span><span>Raanana</span></div></div>
     </a>
     <a class="card extra" onclick="openProject('kenshoo')">
-      <img src="assets/projects/09_Kenshoo/web_01.webp" loading="lazy" decoding="async" alt="Kenshoo">
+      <img src="assets/projects/09_Kenshoo/web_01.webp" srcset="assets/projects/09_Kenshoo/web_01_720.webp 720w, assets/projects/09_Kenshoo/web_01.webp 1200w" sizes="(max-width:640px) 100vw, (max-width:900px) 50vw, 34vw" width="1200" height="799" loading="lazy" decoding="async" alt="Kenshoo">
       <div class="num">19</div>
       <div class="meta"><h3>Kenshoo</h3><div class="sub"><span><b>1,000</b> sqm</span><span>Modiin</span></div></div>
     </a>
     <a class="card extra" onclick="openProject('buildingno9')">
-      <img src="assets/projects/buildingno9/web_01.webp" loading="lazy" decoding="async" alt="Building No.9 | Park Atidim">
+      <img src="assets/projects/buildingno9/web_01.webp" srcset="assets/projects/buildingno9/web_01_720.webp 720w, assets/projects/buildingno9/web_01.webp 1200w" sizes="(max-width:640px) 100vw, (max-width:900px) 50vw, 34vw" width="1200" height="675" loading="lazy" decoding="async" alt="Building No.9 | Park Atidim">
       <div class="num">20</div>
       <div class="meta"><h3>Building No.9 | Park Atidim</h3><div class="sub"><span><b>8,000</b> sqm</span><span>Tel Aviv</span></div></div>
     </a>
     <a class="card extra" onclick="openProject('quicklizard')">
-      <img src="assets/projects/quicklizard/web_01.webp" loading="lazy" decoding="async" alt="QuickLizard">
+      <img src="assets/projects/quicklizard/web_01.webp" srcset="assets/projects/quicklizard/web_01_720.webp 720w, assets/projects/quicklizard/web_01.webp 1200w" sizes="(max-width:640px) 100vw, (max-width:900px) 50vw, 34vw" width="1200" height="799" loading="lazy" decoding="async" alt="QuickLizard">
       <div class="num">21</div>
       <div class="meta"><h3>QuickLizard</h3><div class="sub"><span><b>900</b> sqm</span><span>Petah Tikva</span></div></div>
     </a>
     <a class="card extra" onclick="openProject('equity')">
-      <img src="assets/projects/equity/web_01.webp" loading="lazy" decoding="async" alt="Equity">
+      <img src="assets/projects/equity/web_01.webp" srcset="assets/projects/equity/web_01_720.webp 720w, assets/projects/equity/web_01.webp 1200w" sizes="(max-width:640px) 100vw, (max-width:900px) 50vw, 34vw" width="1200" height="799" loading="lazy" decoding="async" alt="Equity">
       <div class="num">22</div>
       <div class="meta"><h3>Equity</h3><div class="sub"><span><b>1,200</b> sqm</span><span>Petah Tikva</span></div></div>
     </a>
     <a class="card extra" onclick="openProject('cardiology')">
-      <img src="assets/projects/cardiology/web_01.webp" loading="lazy" decoding="async" alt="Cardiology Innovation Center">
+      <img src="assets/projects/cardiology/web_01.webp" srcset="assets/projects/cardiology/web_01_720.webp 720w, assets/projects/cardiology/web_01.webp 1200w" sizes="(max-width:640px) 100vw, (max-width:900px) 50vw, 34vw" width="1200" height="675" loading="lazy" decoding="async" alt="Cardiology Innovation Center">
       <div class="num">23</div>
       <div class="meta"><h3>Cardiology Innovation Center</h3><div class="sub"><span><b>600</b> sqm</span><span>Petah Tikva</span></div></div>
     </a>
     <a class="card extra" onclick="openProject('polytex')">
-      <img src="assets/projects/polytex/web_01.webp" loading="lazy" decoding="async" alt="Polytex">
+      <img src="assets/projects/polytex/web_01.webp" srcset="assets/projects/polytex/web_01_720.webp 720w, assets/projects/polytex/web_01.webp 1200w" sizes="(max-width:640px) 100vw, (max-width:900px) 50vw, 34vw" width="1200" height="799" loading="lazy" decoding="async" alt="Polytex">
       <div class="num">24</div>
       <div class="meta"><h3>Polytex</h3><div class="sub"><span><b>2,000</b> sqm</span><span>Petah Tikva</span></div></div>
     </a>
     <a class="card extra" onclick="openProject('magalcom')">
-      <img src="assets/projects/magalcom/web_01.webp" loading="lazy" decoding="async" alt="Magalcom">
+      <img src="assets/projects/magalcom/web_01.webp" srcset="assets/projects/magalcom/web_01_720.webp 720w, assets/projects/magalcom/web_01.webp 1200w" sizes="(max-width:640px) 100vw, (max-width:900px) 50vw, 34vw" width="1200" height="799" loading="lazy" decoding="async" alt="Magalcom">
       <div class="num">25</div>
       <div class="meta"><h3>Magalcom</h3><div class="sub"><span><b>2,500</b> sqm</span><span>Shoham</span></div></div>
     </a>
     <a class="card extra" onclick="openProject('tbs')">
-      <img src="assets/projects/tbs/web_01.webp" loading="lazy" decoding="async" alt="TBS">
+      <img src="assets/projects/tbs/web_01.webp" srcset="assets/projects/tbs/web_01_720.webp 720w, assets/projects/tbs/web_01.webp 1200w" sizes="(max-width:640px) 100vw, (max-width:900px) 50vw, 34vw" width="1200" height="799" loading="lazy" decoding="async" alt="TBS">
       <div class="num">26</div>
       <div class="meta"><h3>TBS</h3><div class="sub"><span><b>300</b> sqm</span><span>Petah Tikva</span></div></div>
     </a>
     <a class="card extra" onclick="openProject('ginditlv')">
-      <img src="assets/projects/ginditlv/web_01.webp" loading="lazy" decoding="async" alt="Gindi TLV">
+      <img src="assets/projects/ginditlv/web_01.webp" srcset="assets/projects/ginditlv/web_01_720.webp 720w, assets/projects/ginditlv/web_01.webp 1200w" sizes="(max-width:640px) 100vw, (max-width:900px) 50vw, 34vw" width="1200" height="800" loading="lazy" decoding="async" alt="Gindi TLV">
       <div class="num">27</div>
       <div class="meta"><h3>Gindi TLV</h3><div class="sub"><span><b>120</b> sqm</span><span>Tel Aviv</span></div></div>
     </a>
     <a class="card extra" onclick="openProject('alfeimenashe')">
-      <img src="assets/projects/alfeimenashe/web_01.webp" loading="lazy" decoding="async" alt="Alfei Menashe">
+      <img src="assets/projects/alfeimenashe/web_01.webp" srcset="assets/projects/alfeimenashe/web_01_720.webp 720w, assets/projects/alfeimenashe/web_01.webp 1200w" sizes="(max-width:640px) 100vw, (max-width:900px) 50vw, 34vw" width="1200" height="799" loading="lazy" decoding="async" alt="Alfei Menashe">
       <div class="num">28</div>
       <div class="meta"><h3>Alfei Menashe</h3><div class="sub"><span><b>250</b> sqm</span><span>Alfei Menashe</span></div></div>
     </a>
     <a class="card extra" onclick="openProject('bler')">
-      <img src="assets/projects/bler/web_01.webp" loading="lazy" decoding="async" alt="Bler">
+      <img src="assets/projects/bler/web_01.webp" srcset="assets/projects/bler/web_01_720.webp 720w, assets/projects/bler/web_01.webp 1200w" sizes="(max-width:640px) 100vw, (max-width:900px) 50vw, 34vw" width="1200" height="799" loading="lazy" decoding="async" alt="Bler">
       <div class="num">29</div>
       <div class="meta"><h3>Bler</h3><div class="sub"><span><b>400</b> sqm</span><span>Petah Tikva</span></div></div>
     </a>
@@ -1445,7 +1515,7 @@
       <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;height:0;width:0;opacity:0">
       <input type="text" name="name" placeholder="Your name" aria-label="Your name" autocomplete="name" required>
       <input type="email" name="email" placeholder="Email" aria-label="Email address" autocomplete="email" required>
-      <input type="text" name="phone" placeholder="Phone (optional)" aria-label="Phone (optional)" autocomplete="tel" class="full">
+      <input type="tel" inputmode="tel" name="phone" placeholder="Phone (optional)" aria-label="Phone (optional)" autocomplete="tel" class="full">
       <textarea name="message" placeholder="Tell us about your project" aria-label="Tell us about your project" class="full" required></textarea>
       <button type="submit">Send message</button>
     </form>
@@ -1458,7 +1528,7 @@
 </div></section>
 
 <footer><div class="wrap">
-  <span>© 2026 Alter Architects. All rights reserved. · <a href="accessibility.html" lang="he" style="color:inherit;text-decoration:none;border-bottom:1px solid #2b2b27;opacity:.8">הצהרת נגישות</a></span>
+  <span>© 2026 Alter Architects. All rights reserved. · <a href="accessibility.html" lang="he" style="color:inherit;text-decoration:none;border-bottom:1px solid #55554f">הצהרת נגישות</a></span>
   <span><span style="color:var(--lime)">Refined.</span> Innovative. Tailor Made.</span>
 </div></footer>
 
@@ -1493,9 +1563,12 @@
   },{threshold:.18,rootMargin:'0px 0px -8% 0px'});
   document.querySelectorAll('.reveal,.rule').forEach(function(el){io.observe(el)});
 
+  /* the HTML carries the final numbers; reset to the start value (hidden at this point) so the count-up can play */
+  if(!(matchMedia('(prefers-reduced-motion:reduce)').matches)) document.querySelectorAll('.stats .cnt').forEach(function(c){c.textContent=(c.dataset.from||0);});
   /* count-up (idempotent — runs once, only when actually visible) */
   function countUp(scope){
     if(window.__statsCounted)return; window.__statsCounted=true;
+    if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;
     (scope||document).querySelectorAll('.cnt').forEach(function(c){
       var to=+c.dataset.to,from=+(c.dataset.from||0),suf=c.dataset.suf||'',t0=null,dur=(+(c.dataset.dur||1600));
       function tick(ts){if(!t0)t0=ts;var p=Math.min((ts-t0)/dur,1);
@@ -1619,6 +1692,8 @@
     var g=document.getElementById('grid'), b=document.getElementById('viewAll');
     var open=g.classList.toggle('show-all');
     b.textContent=open?'Show less ↑':'View all projects →';
+    b.setAttribute('aria-expanded',open?'true':'false');
+    if(!open){var wk=document.getElementById('grid'); if(wk)wk.scrollIntoView({block:'start'});}
   };
 })();
 </script>
@@ -1694,6 +1769,7 @@
   function cl(x){return x<0?0:x>1?1:x;}
   function ss(x,a,b){x=cl((x-a)/(b-a));return x*x*(3-2*x);}
   function fx(){
+    if(innerWidth<=760)return;
     var total=pin.offsetHeight-innerHeight; if(total<=0)return;
     var p=cl(-pin.getBoundingClientRect().top/total);
     var fade=ss(p,0.74,0.90);
@@ -1777,9 +1853,12 @@
     var data={}; new FormData(cf).forEach(function(v,k){data[k]=v;});
     if(data._honey){ cf.innerHTML='<div class="ok">Thank you — your message is on its way.</div>'; return; } /* honeypot: silently drop bots */
     fetch('https://formsubmit.co/ajax/office@altertects.com',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(data)})
-     .then(function(r){return r.json();})
-     .then(function(){ cf.innerHTML='<div class="ok">Thank you \u2014 your message is on its way. We\u2019ll be in touch shortly.</div>'; })
-     .catch(function(){ btn.disabled=false; btn.textContent=old; alert('Sorry, something went wrong. Please email office@altertects.com'); });
+     .then(function(r){ if(!r.ok) throw new Error('http'); return r.json(); })
+     .then(function(j){ if(j && String(j.success)==='false') throw new Error('rejected');
+       cf.innerHTML='<div class="ok" role="status">Thank you \u2014 your message is on its way. We\u2019ll be in touch shortly.</div>'; })
+     .catch(function(){ btn.disabled=false; btn.textContent=old;
+       var er=cf.querySelector('.err'); if(!er){ er=document.createElement('div'); er.className='err'; er.setAttribute('role','alert'); cf.appendChild(er); }
+       er.innerHTML='Sorry, the message didn\u2019t go through. Please email <a href="mailto:office@altertects.com">office@altertects.com</a> or WhatsApp us.'; });
   });
 })();
 </script>
